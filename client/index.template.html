@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{meta.title}}</title>
+        
+        {{{meta.description}}}
+        <meta property="og:title" content="{{meta.title}}">
+        <meta property="og:description" content="{{meta.description}}">
+        <!-- <meta property="og:image" content="{{meta.card}}"> -->
+        <meta property="og:url" content="{{ fullUrl }}">
+        <meta name="twitter:card" content="summary_large_image">
+        {{{meta.robots}}}
+
+        <meta name="author" content="Brian Whicheloe">
+        <link rel="shortcut icon" href="/icons/favicon.ico" id="favicon">
+        <link rel="manifest" href="/manifest.json">
+        <meta name="theme-color" content="#4e4e4e" id="theme_color">
+        <meta name="msapplication-TileColor" content="#ffc40d">
+        <meta name="msapplication-TileImage" content="/icons/w_168.png">
+
+        {{{ renderStyles() }}}
+    </head>
+    <body>
+        <!--vue-ssr-outlet-->
+
+        {{{ renderState() }}}
+        {{{ renderScripts() }}}
+    </body>
+</html>
