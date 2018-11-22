@@ -7,6 +7,7 @@ const createRenderer = (serverBundle, clientManifest, template) => {
         template,
         clientManifest,
         inject: false,
+        // This means that store, app, and everything else should be NON STATEFUL. Factories.
         runInNewContext: false,
         // cache: require('lru-cache')({
         //     max: 1000,

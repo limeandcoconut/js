@@ -25,55 +25,43 @@ app.use('/dist/', expressStaticGzip(path.resolve(__dirname, '../', 'dist'), {
     indexFromEmptyFile: false,
 }))
 
-// If in development, load resources from HMR server
+let render
+
+// If in development, load resources from HMR server.
 if (process.env.NODE_ENV === 'development') {
     console.log('Running in development mode!')
-    let render
 
+    // Set default render in case there is a request before inital pack.
+    render = (req, res) => res.send('Compiling, reload in a moment.')
+
+    // Add hot middleware and create a new render function each time both client and server have finished packing.
     require('./hmr.js')(app, (serverBundle, clientManifest, template) => {
         render = require('./ssr_renderer.js')(clientManifest, serverBundle, template)
     })
 
-    // TODO move default meta somewhere
-    // TODO comment on why default meta exists
-    app.get('*', (req, res) => {
-        if (render) {
-            const context = {
-                url: req.url,
-                meta: {
-                    title: 'Default Title',
-                },
-                fullUrl: 'https://' + req.get('host') + req.originalUrl,
-            }
-
-            render(req, res, context)
-        } else {
-            res.send('Compiling, reload in a moment.')
-        }
-    })
-
+// If in production, load the client and server files to be served.
 } else {
-    // If in production, load the client and server files to be served
     console.log('Server is running in production mode')
 
-    const clientManifest = require('../dist/vue-ssr-client-manifest.json')
-    const serverBundlePath = '../dist/vue-ssr-server-bundle.json'
     const template = fs.readFileSync(path.resolve('./dist/index.html'), 'utf8')
-    let serverBundle = require(serverBundlePath)
-    let render = require('./ssr_renderer.js')(clientManifest, serverBundle, template)
-
-    app.get('*', (req, res) => {
-        const context = {
-            url: req.url,
-            meta: {
-                title: 'Default Title',
-            },
-            fullUrl: 'https://' + req.get('host') + req.originalUrl,
-        }
-
-        render(req, res, context)
-    })
+    const serverBundle = require('../dist/vue-ssr-server-bundle.json')
+    const clientManifest = require('../dist/vue-ssr-client-manifest.json')
+    render = require('./ssr_renderer.js')(clientManifest, serverBundle, template)
 }
+
+// TODO move default meta somewhere
+// TODO comment on why default meta exists
+app.get('*', (req, res) => {
+    const context = {
+        url: req.url,
+        meta: {
+            title: 'Default Title',
+        },
+        fullUrl: 'https://' + req.get('host') + req.originalUrl,
+    }
+
+    render(req, res, context)
+})
 
 app.listen(frontendPort, (err) => {
     if (err) {
