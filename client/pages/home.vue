@@ -25,6 +25,7 @@ export default {
 
 <style lang="less">
 @import '../styles/mixins.less';
+@import '../styles/global.less';
 
 .foo {
     color: blue;
