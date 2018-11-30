@@ -1,27 +1,134 @@
-.desktop(@content) {
-    @media screen and (min-width: 414px) {
-        @content();
+// @import (css) url('https://fonts.googleapis.com/css?family=Rubik+Mono+One|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i');
+
+@red: #D01420;
+@dimred: #610101;
+
+.grid-breakpoints() {
+    @xs: 0;
+    @sm: 480px;
+    @md: 768px;
+    @lg: 1200px;
+    @xl: 2200px;
+};
+
+@baseline: 6px;
+@spacing: {
+    no:      0;
+    xxs:     1 * @baseline;
+    xs:      2 * @baseline;
+    sm:      3 * @baseline;
+    md:      4 * @baseline;
+    lg:      5 * @baseline;
+    xl:      7 * @baseline;
+    xxl:     10 * @baseline;
+    xxxl:    11 * @baseline;
+};
+
+.min-font-sizes() {
+    @card:            6;
+    @cardTitle:       12;
+    @cardSubtitle:    8;
+    @xs:              10;
+    @sm:              12.5;
+    @md:              15;
+    @venti:           22.5;
+    @tetra:           36;
+    @giga:            52.5;
+};
+
+.max-font-sizes() {
+    @card:            30;
+    @cardTitle:       60;
+    @cardSubtitle:    40;
+    @xs:              20;
+    @sm:              25;
+    @md:              30;
+    @venti:           45;
+    @tetra:           72;
+    @giga:           105;
+};
+
+.rubik(@weight: regular) {
+    font-family: 'Rubik', sans-serif;
+    font-style: regular;
+    font-weight: @weight;
+}
+
+.rmn(@weight: regular) {
+    font-family: 'Rubik Mono One', sans-serif;
+    font-style: regular;
+    font-weight: @weight;
+}
+
+
+// Height
+// Standard usage:
+// height: .height(md)[];
+// This is here to ensure that you are sticking to your normalization.
+.height(@multiple) {
+    @return: @baseline * @multiple;
+}
+
+// px
+// Standard usage:
+// font-size: .px(@min-fz)[];
+// Converts the given scalar to px.
+.px(@scalar) {
+    @return: @scalar * 1px;
+}
+
+.above(@width; @rules) {
+        @media screen and (min-width: .grid-breakpoints[@@width]) {
+            @rules();
+        }
+}
+
+.below(@width; @rules) {
+        @media screen and (max-width: .grid-breakpoints[@@width] - 1px) {
+            @rules();
+        }
+}
+
+// fz (font-size)
+// Standard usage:
+// .fz(venti);
+// Outputs styles which will gracefully scale between the minimum font-size at the minimum screen size and the maximum
+// font-size at the maximum screen size. Outside screen size limits will default to the appropriate font-size extreme.
+.fz(@key) {
+    @min-fz: .min-font-sizes[@@key];
+    @max-fz: .max-font-sizes[@@key];
+
+    font-size: .px(@min-fz)[];
+
+    .above(sm; {
+        @diff: .grid-breakpoints[@xl] - .grid-breakpoints[@sm];
+        @font-diff: @max-fz - @min-fz;
+        @font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+        font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+    });
+
+    .above(xl; {
+        font-size: .px(@max-fz)[];
+    });
+}
+
+// Responsive ratio
+// Standard usage:
+// @include ratio(16; 9);
+// @include ratio(16; 9; true);
+.ratio(@x; @y; @pseudo: false) when (@pseudo = true) {
+    @padding: unit((@y / @x) * 100, %);
+    &::before {
+        content: ' ';
+        display: block;
+        position: relative;
+        width: 100%;
+        padding-top: @padding;
     }
 }
 
-.tablet(@content) {
-    @media screen and (max-width: 1028px) {
-        @content();
-    }
+.ratio(@x; @y; @pseudo: false) when not (@pseudo = true) {
+    @padding: unit((@y / @x) * 100, %);
+    padding-top: @padding;
 }
 
-.mobile(@content) {
-    @media screen and (max-width: 414px) {
-        @content();
-    }
-}
-
-// FIXME not yet working
-// .tablet_mobile(@content) {
-//     .tablet() {
-//         @content();
-//     }
-//     .mobile() {
-//         @content();
-//     }
-// }
