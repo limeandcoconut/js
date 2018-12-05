@@ -1,5 +1,7 @@
 // @import (css) url('https://fonts.googleapis.com/css?family=Rubik+Mono+One|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i');
-
+@redline: #e66465;
+@blueline: #9198e5;
+@greenline: #659865;
 @red: #D01420;
 @dimred: #610101;
 
@@ -11,7 +13,15 @@
     @xl: 2200px;
 };
 
-@baseline: 6px;
+@diff: .grid-breakpoints[@xl] - .grid-breakpoints[@sm];
+@max-base: 12;
+@min-base: 6;
+@base-diff: @max-base - @min-base;
+// @font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+@b: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]);
+
+// @baseline: 6px;
+@baseline: @b;
 @spacing: {
     no:      0;
     xxs:     1 * @baseline;
@@ -24,6 +34,13 @@
     xxxl:    11 * @baseline;
 };
 
+.basis(@scalar) {
+    @return: calc(@baseline * @scalar);
+}
+
+// height: calc(@dashboard-height ~"-" (@i * (@dashlet-header-height + @dashboard-margin + @dashlet-border)));
+// which will result in e.g. height: calc(90.5% - 36px);
+
 .min-font-sizes() {
     @card:            6;
     @cardTitle:       12;
@@ -33,7 +50,8 @@
     @md:              15;
     @venti:           22.5;
     @tetra:           36;
-    @giga:            52.5;
+    // @giga:            52.5;
+    @giga:            60;
 };
 
 .max-font-sizes() {
@@ -45,7 +63,7 @@
     @md:              30;
     @venti:           45;
     @tetra:           72;
-    @giga:           105;
+    @giga:           108;
 };
 
 .rubik(@weight: regular) {
@@ -58,6 +76,27 @@
     font-family: 'Rubik Mono One', sans-serif;
     font-style: regular;
     font-weight: @weight;
+}
+
+.overlay(@color: @redline) {
+    &::before {
+        content: ' ';
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        background: repeating-linear-gradient(transparent, transparent calc(@baseline - 1px), @color calc(@baseline - 1px), @color @baseline);
+        z-index: 1000;
+        pointer-events: none;
+        // font-size: .basis(5)[];
+        // font-size: @baseline;
+        // padding-top: @padding;
+    }
 }
 
 
@@ -77,16 +116,30 @@
     @return: @scalar * 1px;
 }
 
-.above(@width; @rules) {
-        @media screen and (min-width: .grid-breakpoints[@@width]) {
-            @rules();
-        }
+// p
+// Standard usage:
+// font-size: .p(@min-width)[];
+// Converts the given scalar to percent.
+.p(@scalar) {
+    @return: @scalar * 1%;
+}
+
+.above(@width; @rules) when not (isnumber(@width)) {
+    @media screen and (min-width: .grid-breakpoints[@@width]) {
+        @rules();
+    }
+}
+
+.above(@width; @rules) when (isnumber(@width)) {
+    @media screen and (min-width: @width) {
+        @rules();
+    }
 }
 
 .below(@width; @rules) {
-        @media screen and (max-width: .grid-breakpoints[@@width] - 1px) {
-            @rules();
-        }
+    @media screen and (max-width: .grid-breakpoints[@@width] - 1px) {
+        @rules();
+    }
 }
 
 // fz (font-size)
@@ -103,7 +156,7 @@
     .above(sm; {
         @diff: .grid-breakpoints[@xl] - .grid-breakpoints[@sm];
         @font-diff: @max-fz - @min-fz;
-        @font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+        // @font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
         font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
     });
 
@@ -130,5 +183,52 @@
 .ratio(@x; @y; @pseudo: false) when not (@pseudo = true) {
     @padding: unit((@y / @x) * 100, %);
     padding-top: @padding;
+}
+
+@base-font-size: 	12px;
+@base-line-height: 	1.2;
+
+// this value may vary for each font
+// unitless value relative to 1em
+@cap-height: 		0.64;
+
+
+.baseline(@font-size; @scale: 2) {
+
+	// rhythm unit
+	@rhythm: @base-line-height * @font-size / @scale;
+
+	// number of rhythm units that can fit the font-size
+	@lines: ceil((@font-size + 0.001px) / @rhythm);
+
+	// calculate the new line-height
+	@line-height: unit(@rhythm * @lines / @font-size);
+
+	// use the results
+	font-size: @font-size;
+	line-height: @line-height;
+
+	@baseline-distance: (@line-height - @cap-height) / 2;
+
+
+
+	// METHOD 1
+	/////////////////
+
+	// this method can relatively move down elements you may not want to
+	// position: relative;
+	// top: @baseline-distance + em;
+
+
+
+	// METHOD 2
+	/////////////////
+
+	// if you use this mixin only on elements that have one direction margins
+	// http://csswizardry.com/2012/06/single-direction-margin-declarations/
+	// you can use this method with no worries.
+	// this method assumes the direction is down and the margin is @base-line-height
+	padding-top: unit(@baseline-distance, em);
+	margin-bottom: unit(@base-line-height - @baseline-distance, em);
 }
 
