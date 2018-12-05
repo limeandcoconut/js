@@ -66,15 +66,15 @@
     @giga:           108;
 };
 
-.rubik(@weight: regular) {
+.rubik(@weight: 400) {
     font-family: 'Rubik', sans-serif;
-    font-style: regular;
+    font-style: 400;
     font-weight: @weight;
 }
 
-.rmn(@weight: regular) {
+.rmn(@weight: 400) {
     font-family: 'Rubik Mono One', sans-serif;
-    font-style: regular;
+    font-style: 400;
     font-weight: @weight;
 }
 
@@ -140,6 +140,17 @@
     @media screen and (max-width: .grid-breakpoints[@@width] - 1px) {
         @rules();
     }
+}
+
+.aria-visible() {
+    clip-path: inset(100%);
+    clip: rect(1px 1px 1px 1px); /* IE 6/7 */
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; /* added line */
+    width: 1px;
 }
 
 // fz (font-size)
