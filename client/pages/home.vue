@@ -42,7 +42,7 @@
                                 <span class="char">u</span>
                                 <span class="char">l</span>
                                 <span class="char">l</span>
-                                <span class="char"> </span>
+                                <span class="char">  </span>
                                 <span class="char">S</span>
                                 <span class="char">t</span>
                                 <span class="char">a</span>
@@ -52,7 +52,7 @@
                                 <!-- <span class="char">W</span>
                                 <span class="char">e</span>
                                 <span class="char">b</span> -->
-                                <span class="char"> </span>
+                                <span class="char">  </span>
                                 <span class="char">D</span>
                                 <span class="char">e</span>
                                 <span class="char">v</span>
