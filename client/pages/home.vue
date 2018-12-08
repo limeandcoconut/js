@@ -38,9 +38,20 @@
                         <div class="line">
                             <h2 class="aria-visible">Full Stack Web Developer</h2>
                             <span class="aria-hidden" aria-hidden="true">
-                                <span class="char">W</span>
+                                <span class="char">F</span>
+                                <span class="char">u</span>
+                                <span class="char">l</span>
+                                <span class="char">l</span>
+                                <span class="char"> </span>
+                                <span class="char">S</span>
+                                <span class="char">t</span>
+                                <span class="char">a</span>
+                                <span class="char">c</span>
+                                <span class="char">k</span>
+
+                                <!-- <span class="char">W</span>
                                 <span class="char">e</span>
-                                <span class="char">b</span>
+                                <span class="char">b</span> -->
                                 <span class="char"> </span>
                                 <span class="char">D</span>
                                 <span class="char">e</span>
