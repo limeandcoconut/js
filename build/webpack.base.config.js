@@ -40,7 +40,7 @@ let config = {
                         loader: 'postcss-loader',
                         options: {
                             plugins: () => [require('autoprefixer')({
-                                browsers: ['> 1%', 'last 2 versions'],
+                                browsers: ['> 1%', 'last 3 versions'],
                             })],
                         },
                     },
