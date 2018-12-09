@@ -4,6 +4,8 @@
 @greenline: #659865;
 @red: #D01420;
 @dimred: #610101;
+@dimgred: #300;
+@lessdimgred: #300;
 
 .grid-breakpoints() {
     @xs: 0;
@@ -17,11 +19,16 @@
 @max-base: 12;
 @min-base: 6;
 @base-diff: @max-base - @min-base;
-// @font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+// WARNING: Always update the @baseline/@b variables and .basis() in conjunction.
 @b: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]);
-
 // @baseline: 6px;
 @baseline: @b;
+.basis(@scalar) {
+    // @return: calc(@baseline * @scalar);
+    // WARNING: Always update the @baseline/@b variables and .basis() in conjunction.
+    @return: calc( (((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]) * @scalar)
+}
+
 @spacing: {
     no:      0;
     xxs:     1 * @baseline;
@@ -33,11 +40,6 @@
     xxl:     10 * @baseline;
     xxxl:    11 * @baseline;
 };
-
-.basis(@scalar) {
-    // @return: calc(@baseline * @scalar);
-    @return: calc( (((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]) * @scalar)
-}
 
 // height: calc(@dashboard-height ~"-" (@i * (@dashlet-header-height + @dashboard-margin + @dashlet-border)));
 // which will result in e.g. height: calc(90.5% - 36px);

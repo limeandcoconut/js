@@ -132,7 +132,7 @@
         </div>
 
         <div class="tag" @click="flip">
-            Flip it.
+            FLIP
         </div>
     </div>
         <!-- <router-link to="/foo">Foo</router-link> -->
@@ -169,10 +169,6 @@ export default {
 @import '../styles/mixins.less';
 @import '../styles/global.less';
 
-// html:lang(en)>body .layout {
-    // }
-
-
 .layout {
     background-color: @red;
     display: grid;
@@ -199,33 +195,30 @@ export default {
         flex-direction: column;
     }
 
-    // :not(.logo) {
-        //     display: none;
-    // }
+    // // :not(.logo) {
+    //     //     display: none;
+    // // }
 
-    .logo {
-        display: none;
-        // .ratio(1, 1, pse);
-        width: 60vw;
-        height: 60vw;
-        border: 2px solid dimgrey;
-        // .rmn();
-        // line-height: 1rem;
-        font-size: .basis(63)[];
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-end;
-        line-height: 0.78em;
-        font-weight: 600;
-        padding: 0 90px 60px 0;
-        letter-spacing: -0.06em;
-    }
+    // .logo {
+    //     display: none;
+    //     // .ratio(1, 1, pse);
+    //     width: 60vw;
+    //     height: 60vw;
+    //     border: 2px solid dimgrey;
+    //     // .rmn();
+    //     font-size: .basis(63)[];
+    //     display: flex;
+    //     align-items: flex-end;
+    //     justify-content: flex-end;
+    //     line-height: 0.78em;
+    //     font-weight: 600;
+    //     padding: 0 90px 60px 0;
+    //     letter-spacing: -0.06em;
+    // }
 
 }
 
 .tag {
-    background-color: white;
-    grid-column: 2 / 1;
     position: fixed;
     top: auto;
     left: calc(50vw - 15%);
@@ -235,14 +228,15 @@ export default {
     align-items: center;
     height: 3em;
     min-width: 30%;
-    box-shadow: #422 1px 1px 1px 0px;
+    // box-shadow: @lessdimgred 1px 1px 1px 0px;
+    box-shadow: @lessdimgred 20px 20px 40px -10px;
     text-align: center;
     cursor: pointer;
+    font-weight: bold;
 
     .above(lg; {
         grid-column: 3 / 1;
         position: relative;
-        // top: 20%;
         margin-top: 20%;
         bottom: auto;
         left: auto;
@@ -250,28 +244,27 @@ export default {
 }
 
 .card {
-    .ratio(7, 4, true);
-    background-color: white;
+    .ratio(7, 4);
+    background: linear-gradient(white 0%, white 60%, dimgrey 60%, dimgrey 100%);
     grid-column: 2 / 1;
     justify-self: stretch;
     position: relative;
     top: -9px;
-    box-shadow: #300 18px 18px 1px 8px;
+    box-shadow: @dimgred 18px 18px 1px 8px;
     transform-style: preserve-3d;
     transform-origin: center right;
-    transform: translate3d(0, 0, 0) scale(1.0, 1.0);
+    transform: translateZ(0) scale(.999, .999);
     transition:
-        transform 2s cubic-bezier(0.04, 1, 0.01, 1),
-        box-shadow 2s step-start .02s;
+        transform 2s cubic-bezier(0.04, 1, 0.01, 1);
+    font-smoothing: antialiased !important;
 
-    font-smoothing: antialiased;
 
     @supports not (display:grid) {
         width: 90%;
     }
 
     &.card--flipped {
-        box-shadow: #300 -18px 18px 1px 8px;
+        box-shadow: @dimgred -18px 18px 1px 8px;
         transform: translateX(-100%) rotateY(-180deg);
 
         .contents {
@@ -297,18 +290,6 @@ export default {
         backface-visibility: hidden;
         transition: background-color 2s cubic-bezier(0.08, 1.31, 0, 1.35);
         text-align: center;
-        // overflow: hidden;
-
-        &:not(.backface)::before {
-            content: ' ';
-            background-color: dimgrey;
-            position: absolute;
-            bottom: -2px;
-            left: 0px;
-            right: 0px;
-            height: calc(40% + 2px);
-            backface-visibility: hidden;
-        }
 
         &.backface {
             background-color: black;
@@ -321,6 +302,7 @@ export default {
             transform: rotateY(-180deg) translateZ(.0001em);
             line-height: 1.2;
             text-align: center;
+            padding: 1em;
         }
 
         .column {
@@ -379,9 +361,6 @@ export default {
         }
 
         .line, .link {
-            // display: flex;
-            // justify-content: space-between;
-            // align-content: center;
             height: 1.2em;
             width: 98%;
             .rubik(400);
@@ -395,8 +374,6 @@ export default {
                 align-content: center;
                 height: 100%;
                 width: 100%;
-                // width: 98%;
-                // .rubik(400);
                 font-size: .basis(2)[];
                 text-decoration: none;
             }
