@@ -174,6 +174,7 @@ export default {
     display: grid;
     grid-template: auto / 1fr 10fr 1fr;
     align-items: center;
+    align-content: center;
     justify-items: center;
     justify-content: center;
     height: 100vh;
@@ -231,7 +232,8 @@ export default {
     .above(lg; {
         grid-column: 3 / 1;
         position: relative;
-        top: 20%;
+        // top: 20%;
+        margin-top: 20%;
         bottom: auto;
     })
 }
@@ -301,7 +303,7 @@ export default {
             align-items: center;
             justify-content: center;
             justify-items: center;
-            transform: rotateY(-180deg);
+            transform: rotateY(-180deg) translateZ(.0001em);
             line-height: 1.2;
             text-align: center;
         }
