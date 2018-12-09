@@ -35,7 +35,8 @@
 };
 
 .basis(@scalar) {
-    @return: calc(@baseline * @scalar);
+    // @return: calc(@baseline * @scalar);
+    @return: calc( (((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]) * @scalar)
 }
 
 // height: calc(@dashboard-height ~"-" (@i * (@dashlet-header-height + @dashboard-margin + @dashlet-border)));
