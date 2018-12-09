@@ -10,7 +10,7 @@
                         <span class="title">Smith</span>
                     </h1>
                     <div class="half">
-                        <div class="line">
+                        <div class="line hidden-small">
                             <h2 class="aria-visible">Javascript Fungineer (Engineer)</h2>
                             <span class="aria-hidden" aria-hidden="true">
                                 <span class="char">J</span>
@@ -48,10 +48,6 @@
                                 <span class="char">a</span>
                                 <span class="char">c</span>
                                 <span class="char">k</span>
-
-                                <!-- <span class="char">W</span>
-                                <span class="char">e</span>
-                                <span class="char">b</span> -->
                                 <span class="char">&nbsp;&nbsp;</span>
                                 <span class="char">D</span>
                                 <span class="char">e</span>
@@ -90,34 +86,43 @@
                         <a rel="noopener noreferrer" href="https://github.com/limeandcoconut" target="_blank" class="link">
                             <span class="aria-visible">github.com/limeandcoconut</span>
                             <span class="aria-hidden" aria-hidden="true">
-                                <span class="char visible-micro">m</span>
-                                <span class="char visible-micro">y</span>
-                                <span class="char visible-micro">&nbsp;&nbsp;</span>
-                                <span class="char">g</span>
+                                <!-- <span class="char visible-small">m</span>
+                                <span class="char visible-small">y</span> -->
+                                <span class="char visible-small">P</span>
+                                <span class="char visible-small">e</span>
+                                <span class="char visible-small">r</span>
+                                <span class="char visible-small">s</span>
+                                <span class="char visible-small">o</span>
+                                <span class="char visible-small">n</span>
+                                <span class="char visible-small">a</span>
+                                <span class="char visible-small">l</span>
+                                <span class="char visible-small">&nbsp;&nbsp;</span>
+                                <span class="char visible-small">G</span>
+                                <span class="char hidden-small">g</span>
                                 <span class="char">i</span>
                                 <span class="char">t</span>
                                 <span class="char">h</span>
                                 <span class="char">u</span>
                                 <span class="char">b</span>
-                                <span class="char hidden-micro">.</span>
-                                <span class="char hidden-micro">c</span>
-                                <span class="char hidden-micro">o</span>
-                                <span class="char hidden-micro">m</span>
-                                <span class="char hidden-micro">/</span>
-                                <span class="char hidden-micro">l</span>
-                                <span class="char hidden-micro">i</span>
-                                <span class="char hidden-micro">m</span>
-                                <span class="char hidden-micro">e</span>
-                                <span class="char hidden-micro">a</span>
-                                <span class="char hidden-micro">n</span>
-                                <span class="char hidden-micro">d</span>
-                                <span class="char hidden-micro">c</span>
-                                <span class="char hidden-micro">o</span>
-                                <span class="char hidden-micro">c</span>
-                                <span class="char hidden-micro">o</span>
-                                <span class="char hidden-micro">n</span>
-                                <span class="char hidden-micro">u</span>
-                                <span class="char hidden-micro">t</span>
+                                <span class="char hidden-small">.</span>
+                                <span class="char hidden-small">c</span>
+                                <span class="char hidden-small">o</span>
+                                <span class="char hidden-small">m</span>
+                                <span class="char hidden-small">/</span>
+                                <span class="char hidden-small">l</span>
+                                <span class="char hidden-small">i</span>
+                                <span class="char hidden-small">m</span>
+                                <span class="char hidden-small">e</span>
+                                <span class="char hidden-small">a</span>
+                                <span class="char hidden-small">n</span>
+                                <span class="char hidden-small">d</span>
+                                <span class="char hidden-small">c</span>
+                                <span class="char hidden-small">o</span>
+                                <span class="char hidden-small">c</span>
+                                <span class="char hidden-small">o</span>
+                                <span class="char hidden-small">n</span>
+                                <span class="char hidden-small">u</span>
+                                <span class="char hidden-small">t</span>
                             </span>
                         </a>
                     </div>
@@ -368,7 +373,8 @@ export default {
             width: 98%;
             .rubik(400);
             text-decoration: none;
-            font-size: .basis(2)[];
+            // font-size: .basis(2)[];
+            font-size: @min-base * 2px;
 
             .aria-hidden {
                 width: 1px;
@@ -377,8 +383,10 @@ export default {
                 align-content: center;
                 height: 100%;
                 width: 100%;
-                font-size: .basis(2)[];
+                // font-size: .basis(2)[];
+                // font-size: @min-base * 2px;
                 text-decoration: none;
+                // color: green;
             }
 
             .aria-visible {
@@ -387,17 +395,22 @@ export default {
 
             .above(260px; {
                 height: 1em;
-                font-size: .basis(2)[];
+                // font-size: .basis(2)[];
             });
 
             .above(320px; {
                 height: 1.2em;
                 .rubik(500);
-                font-size: .basis(2)[];
+                // font-size: .basis(2)[];
             });
 
             .above(560px; {
                 height: 1em;
+                font-size: .basis(3)[];
+            });
+
+            .above(md; {
+                height: 1.2em;
                 font-size: .basis(3)[];
             });
 
@@ -411,19 +424,28 @@ export default {
                 display: block;
                 text-decoration: none;
 
-                &.visible-micro {
-                    .above(260px; {
+                &.visible-small {
+                    .above(360px; {
                         display: none;
                     });
                 }
 
-                &.hidden-micro {
+                &.hidden-small {
                     display: none;
 
-                    .above(260px; {
+                    .above(360px; {
                         display: block;
                     });
                 }
+            }
+
+
+            &.hidden-small {
+                display: none;
+
+                .above(360px; {
+                    display: block;
+                });
             }
         }
 
@@ -453,15 +475,18 @@ export default {
                 });
 
                 .above(md; {
-                    height: 2px;
+                    bottom: 0.25em;
+                    // height: 2px;
+                    // bottom: ;
                 });
 
-                .above(lg; {
-                    bottom: 0.05em;
-                });
+                // .above(lg; {
+                //     bottom: 0.05em;
+                // });
 
                 .above(xl; {
-                    bottom: 0.25em;
+                    // bottom: 0.25em;
+                    height: 2px;
                 });
             }
 
