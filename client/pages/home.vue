@@ -169,6 +169,10 @@ export default {
 @import '../styles/mixins.less';
 @import '../styles/global.less';
 
+// html:lang(en)>body .layout {
+    // }
+
+
 .layout {
     background-color: @red;
     display: grid;
@@ -191,11 +195,12 @@ export default {
     });
 
     @supports not (display:grid) {
-        background: magenta;
+        display: flex;
+        flex-direction: column;
     }
 
     // :not(.logo) {
-    //     display: none;
+        //     display: none;
     // }
 
     .logo {
@@ -223,6 +228,7 @@ export default {
     grid-column: 2 / 1;
     position: fixed;
     top: auto;
+    left: calc(50vw - 15%);
     bottom: .basis(3)[];
     display: flex;
     justify-content: center;
@@ -239,6 +245,7 @@ export default {
         // top: 20%;
         margin-top: 20%;
         bottom: auto;
+        left: auto;
     })
 }
 
@@ -258,6 +265,10 @@ export default {
         box-shadow 2s step-start .02s;
 
     font-smoothing: antialiased;
+
+    @supports not (display:grid) {
+        width: 90%;
+    }
 
     &.card--flipped {
         box-shadow: #300 -18px 18px 1px 8px;
