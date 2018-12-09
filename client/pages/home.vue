@@ -465,37 +465,53 @@ export default {
                 content: ' ';
                 background-color: black;
                 position: absolute;
-                bottom: -0.05em;
+                bottom: 0.2em;
                 left: 0;
                 right: 0;
                 width: 100%;
                 height: 1px;
 
                 .above(260px; {
-                    bottom: -0.2em;
+                    bottom: 0em;
                 });
 
                 .above(320px; {
-                    bottom: 0.05em;
+                    bottom: 0.2em;
                 });
 
                 .above(560px; {
-                    bottom: 0.15em;
+                    bottom: 0.2em;
+                });
+
+                .above(640px; {
+                    bottom: 0.25em;
                 });
 
                 .above(md; {
-                    bottom: 0.25em;
+                    bottom: 0.4em;
                     // height: 2px;
                     // bottom: ;
+                    height: 2px;
                 });
 
-                // .above(lg; {
-                //     bottom: 0.05em;
-                // });
+                .above(1000px; {
+                    bottom: 0.45em;
+                });
+
+                .above(lg; {
+                    bottom: 0.3em;
+                });
+
+                .above(1350px; {
+                    bottom: 0.35em;
+                });
+
+                .above(1500px; {
+                    bottom: 0.4em;
+                });
 
                 .above(xl; {
                     // bottom: 0.25em;
-                    height: 2px;
                 });
             }
 
