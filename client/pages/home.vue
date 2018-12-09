@@ -190,6 +190,10 @@ export default {
         grid-template: auto / 1fr .basis(60)[] 1fr;
     });
 
+    @supports not (display:grid) {
+        background: magenta;
+    }
+
     // :not(.logo) {
     //     display: none;
     // }
