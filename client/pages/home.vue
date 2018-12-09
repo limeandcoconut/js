@@ -5,10 +5,10 @@
         <div class="card" :class="{'card--flipped': flipped}">
             <div class="contents">
                 <div class="column">
-                    <div class="half">
-                        <div class="title">Jacob</div>
-                        <div class="title">Smith</div>
-                    </div>
+                    <h1 class="half">
+                        <span class="title">Jacob</span>
+                        <span class="title">Smith</span>
+                    </h1>
                     <div class="half">
                         <div class="line">
                             <h2 class="aria-visible">Javascript Fungineer (Engineer)</h2>
@@ -151,6 +151,7 @@ export default {
             title: 'Jacob Smith | Javascript Fungineer',
             useWholeTitle: true,
             description: 'A business card',
+            card: '/images/logo.png',
         }
     },
     mounted() {
@@ -187,7 +188,7 @@ export default {
     });
 
     .above(lg; {
-        grid-template: auto / 1fr .basis(60)[] 1fr;
+        grid-template: auto / 1fr .basis(70)[] 1fr;
     });
 
     @supports not (display:grid) {
@@ -229,7 +230,8 @@ export default {
     height: 3em;
     min-width: 30%;
     // box-shadow: @lessdimgred 1px 1px 1px 0px;
-    box-shadow: @lessdimgred 20px 20px 40px -10px;
+    // box-shadow: @lessdimgred 20px 20px 40px -10px;
+    box-shadow: @lessdimgred 1px 4px 2px 0px;
     text-align: center;
     cursor: pointer;
     font-weight: bold;
@@ -339,7 +341,7 @@ export default {
             });
 
             .above(lg, {
-                font-size: .basis(8)[];
+                font-size: .basis(9)[];
             });
 
         }
@@ -399,6 +401,7 @@ export default {
             });
 
             .above(lg; {
+                height: 1.2em;
                 font-size: .basis(2)[];
             });
 
