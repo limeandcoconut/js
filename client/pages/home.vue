@@ -87,7 +87,7 @@
                                 <span class="char">h</span>
                             </span>
                         </a>
-                        <a href="https://github.com/limeandcoconut" target="_blank" class="link">
+                        <a rel="noopener noreferrer" href="https://github.com/limeandcoconut" target="_blank" class="link">
                             <span class="aria-visible">github.com/limeandcoconut</span>
                             <span class="aria-hidden" aria-hidden="true">
                                 <span class="char visible-micro">m</span>
@@ -220,6 +220,7 @@ export default {
 }
 
 .tag {
+    background-color: @red;
     position: fixed;
     top: auto;
     left: calc(50vw - 15%);
