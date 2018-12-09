@@ -241,6 +241,11 @@ export default {
     text-align: center;
     cursor: pointer;
     font-weight: bold;
+    font-size: @min-base * 2px;
+
+    .above(480px; {
+        font-size: .basis(2)[];
+    });
 
     .above(lg; {
         grid-column: 3 / 1;
@@ -402,6 +407,10 @@ export default {
                 height: 1.2em;
                 .rubik(500);
                 // font-size: .basis(2)[];
+            });
+
+            .above(480px; {
+                font-size: .basis(2)[];
             });
 
             .above(560px; {
