@@ -60,7 +60,7 @@
                                 <span class="char">r</span>
                             </span>
                         </div>
-                        <a href="mailto:js@jacobsmith.tech" class="link">
+                        <a aria-label="Email me at js@jacobsmith.tech" href="mailto:js@jacobsmith.tech" class="link">
                             <span class="aria-visible">js@jacobsmith.tech</span>
                             <span class="aria-hidden" aria-hidden="true">
                                 <span class="char">j</span>
@@ -83,11 +83,9 @@
                                 <span class="char">h</span>
                             </span>
                         </a>
-                        <a rel="noopener noreferrer" href="https://github.com/limeandcoconut" target="_blank" class="link">
+                        <a aria-label="My Github" rel="noopener noreferrer" href="https://github.com/limeandcoconut" target="_blank" class="link">
                             <span class="aria-visible">github.com/limeandcoconut</span>
                             <span class="aria-hidden" aria-hidden="true">
-                                <!-- <span class="char visible-small">m</span>
-                                <span class="char visible-small">y</span> -->
                                 <span class="char visible-small">P</span>
                                 <span class="char visible-small">e</span>
                                 <span class="char visible-small">r</span>
@@ -136,11 +134,10 @@
             </div>
         </div>
 
-        <div class="tag" @click="flip">
+        <button class="tag" @click="flip" type="button">
             FLIP
-        </div>
+        </button>
     </div>
-        <!-- <router-link to="/foo">Foo</router-link> -->
 </template>
 
 <script>
@@ -378,7 +375,6 @@ export default {
             width: 98%;
             .rubik(400);
             text-decoration: none;
-            // font-size: .basis(2)[];
             font-size: @min-base * 2px;
 
             .aria-hidden {
@@ -388,10 +384,7 @@ export default {
                 align-content: center;
                 height: 100%;
                 width: 100%;
-                // font-size: .basis(2)[];
-                // font-size: @min-base * 2px;
                 text-decoration: none;
-                // color: green;
             }
 
             .aria-visible {
@@ -400,13 +393,11 @@ export default {
 
             .above(260px; {
                 height: 1em;
-                // font-size: .basis(2)[];
             });
 
             .above(320px; {
                 height: 1.2em;
                 .rubik(500);
-                // font-size: .basis(2)[];
             });
 
             .above(480px; {
@@ -489,8 +480,6 @@ export default {
 
                 .above(md; {
                     bottom: 0.4em;
-                    // height: 2px;
-                    // bottom: ;
                     height: 2px;
                 });
 
@@ -511,7 +500,6 @@ export default {
                 });
 
                 .above(xl; {
-                    // bottom: 0.25em;
                 });
             }
 
