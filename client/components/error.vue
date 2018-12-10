@@ -1,12 +1,11 @@
 <template>
-    <div v-if="showErrorMessage" class="error_box">
-        <!-- <div class="error_icon"></div> -->
-        <div class="error_title">Error!</div>
-        <div class="error_message">
+    <div v-if="showErrorMessage" class="error-box">
+        <div class="error-title">ERROR</div>
+        <div class="error-message">
             {{ errorMessage }}
         </div>
 
-        <div class="dismiss_button" @click.prevent="dismissError">Dismiss</div>
+        <button class="dismiss-button" @click.prevent="dismissError" type="button">DISMISS</button>
     </div>
 </template>
 
@@ -30,54 +29,44 @@ export default {
 </script>
 
 <style lang="less">
+@import '../styles/mixins.less';
+@import '../styles/global.less';
 
-.error_box {
+.error-box {
     text-align: center;
     position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 300px;
-    height: 200px;
-    border-radius: 5px;
-    padding-top: 15px;
-    background-color: #fff;
-    box-shadow: 1px 1px 7px 3px #232323;
+    top: .basis(1)[];
+    right: .basis(2)[];
+    width: .basis(30)[];
+    height: auto;
+    padding-top: 1em;
+    background-color: white;
+    box-shadow: @dimgred 25px 25px 1px 8px;
     z-index: 200;
     overflow: hidden;
+    line-height: 1.2;
+    font-weight: 500;
+}
 
-    // .error_icon {
-    //     background-image: url('/img/error_icon.png');
-    //     width: 48px;
-    //     height: 48px;
-    //     margin: 0px auto;
-    // }
+.error-title {
+    font-size: .basis(2)[];
+    padding-bottom: 0.5em;
+    .rmn();
+}
 
-    .error_title {
-        color: #f65655;
-        font-size: 24px;
-        margin-top: 5px;
-    }
+.error-message {
+    font-size: .basis(2)[];
+    padding-bottom: 1em;
+}
 
-    .error_message {
-        color: #555;
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
-        height: 50%;
-        font-size: 20px;
-        padding: 10px;
-    }
-
-    .dismiss_button {
-        background-color: #f65655;
-        color: #fff;
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
-        padding: 8px 0px;
-        cursor: pointer;
-    }
+.dismiss-button {
+    display: block;
+    background-color: @dimred;
+    color: white;
+    width: 100%;
+    padding: 1em 0;
+    margin: 0;
+    font-weight: inherit;
+    cursor: pointer;
 }
 </style>
