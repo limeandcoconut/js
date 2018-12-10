@@ -10,6 +10,7 @@
     font-family: 'Rubik';
     font-style: normal;
     font-weight: 400;
+    // Use locally stored and prefetched files, fallback to google.
     src: local('Rubik'), local('Rubik-Regular'), url(https://fonts.gstatic.com/s/rubik/v7/iJWKBXyIfDnIV7nBrXyw023e.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     font-display: swap;
@@ -19,6 +20,7 @@
     font-family: 'Rubik';
     font-style: normal;
     font-weight: 500;
+    // Use locally stored and prefetched files, fallback to google.
     src: local('Rubik Medium'), local('Rubik-Medium'), url(https://fonts.gstatic.com/s/rubik/v7/iJWHBXyIfDnIV7Eyjmmd8WD07oB-.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     font-display: swap;
@@ -28,9 +30,24 @@
     font-family: 'Rubik Mono One';
     font-style: normal;
     font-weight: 400;
+    // Use locally stored and prefetched files, fallback to google.
     src: local('Rubik Mono One Regular'), local('RubikMonoOne-Regular'), url(https://fonts.gstatic.com/s/rubikmonoone/v6/UqyJK8kPP3hjw6ANTdfRk9YSN983TKUJcOj8.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     font-display: swap;
+}
+
+// rubik
+// Standard usage:
+// .rubik(500)[];
+// Gives an element the font face rubik.
+.rubik(@weight: 400) {
+    font-family: 'Rubik', 'Courier New', sans-serif;
+    font-weight: @weight;
+}
+
+.rmn(@weight: 400) {
+    font-family: 'Rubik Mono One', 'Courier New', sans-serif;
+    font-weight: @weight;
 }
 
 .grid-breakpoints() {
@@ -95,18 +112,6 @@
     @giga:           108;
 };
 
-.rubik(@weight: 400) {
-    font-family: 'Rubik', 'Courier New', sans-serif;
-    font-style: normal;
-    font-weight: @weight;
-}
-
-.rmn(@weight: 400) {
-    font-family: 'Rubik Mono One', 'Courier New', sans-serif;
-    font-style: normal;
-    font-weight: @weight;
-}
-
 .overlay(@color: @redline) {
     &::before {
         content: ' ';
@@ -153,6 +158,15 @@
     @return: @scalar * 1%;
 }
 
+// above
+// Standard usage:
+//.above(560px; {
+//    background: red;
+// });
+// OR:
+// .above(md, {
+//    background: red;
+// });
 .above(@width; @rules) when not (isnumber(@width)) {
     @media screen and (min-width: .grid-breakpoints[@@width]) {
         @rules();
@@ -165,12 +179,23 @@
     }
 }
 
-.below(@width; @rules) {
+.below(@width; @rules) when not (isnumber(@width)) {
     @media screen and (max-width: .grid-breakpoints[@@width] - 1px) {
         @rules();
     }
 }
 
+.below(@width; @rules) when (isnumber(@width)) {
+    @media screen and (max-width: @width) {
+        @rules();
+    }
+}
+
+// aria :focus-visible
+// Standard usage:
+// .aria-visible();
+// Use this to visually hide something that you want to be visible to screen readers.
+// Cafrefully consider if thats something you want to do.
 .aria-visible() {
     clip-path: inset(100%);
     clip: rect(1px 1px 1px 1px); /* IE 6/7 */
@@ -233,42 +258,42 @@
 @cap-height: 		0.64;
 
 
-.baseline(@font-size; @scale: 2) {
+// .baseline(@font-size; @scale: 2) {
 
-	// rhythm unit
-	@rhythm: @base-line-height * @font-size / @scale;
+// 	// rhythm unit
+// 	@rhythm: @base-line-height * @font-size / @scale;
 
-	// number of rhythm units that can fit the font-size
-	@lines: ceil((@font-size + 0.001px) / @rhythm);
+// 	// number of rhythm units that can fit the font-size
+// 	@lines: ceil((@font-size + 0.001px) / @rhythm);
 
-	// calculate the new line-height
-	@line-height: unit(@rhythm * @lines / @font-size);
+// 	// calculate the new line-height
+// 	@line-height: unit(@rhythm * @lines / @font-size);
 
-	// use the results
-	font-size: @font-size;
-	line-height: @line-height;
+// 	// use the results
+// 	font-size: @font-size;
+// 	line-height: @line-height;
 
-	@baseline-distance: (@line-height - @cap-height) / 2;
-
-
-
-	// METHOD 1
-	/////////////////
-
-	// this method can relatively move down elements you may not want to
-	// position: relative;
-	// top: @baseline-distance + em;
+// 	@baseline-distance: (@line-height - @cap-height) / 2;
 
 
 
-	// METHOD 2
-	/////////////////
+// 	// METHOD 1
+// 	/////////////////
 
-	// if you use this mixin only on elements that have one direction margins
-	// http://csswizardry.com/2012/06/single-direction-margin-declarations/
-	// you can use this method with no worries.
-	// this method assumes the direction is down and the margin is @base-line-height
-	padding-top: unit(@baseline-distance, em);
-	margin-bottom: unit(@base-line-height - @baseline-distance, em);
-}
+// 	// this method can relatively move down elements you may not want to
+// 	// position: relative;
+// 	// top: @baseline-distance + em;
+
+
+
+// 	// METHOD 2
+// 	/////////////////
+
+// 	// if you use this mixin only on elements that have one direction margins
+// 	// http://csswizardry.com/2012/06/single-direction-margin-declarations/
+// 	// you can use this method with no worries.
+// 	// this method assumes the direction is down and the margin is @base-line-height
+// 	padding-top: unit(@baseline-distance, em);
+// 	margin-bottom: unit(@base-line-height - @baseline-distance, em);
+// }
 
