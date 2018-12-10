@@ -27,7 +27,7 @@ export default (siteName) => {
                 const componentMeta = getMeta(this)
                 if (componentMeta) {
                     if (componentMeta.title) {
-                        if (componentMeta.useWholeTitle) {
+                        if (componentMeta.useTitleOnly) {
                             this.$ssrContext.meta.title = componentMeta.title
                         } else {
                             this.$ssrContext.meta.title = `${componentMeta.title} | ${siteName}`
@@ -60,7 +60,7 @@ export default (siteName) => {
                 let title = siteName
 
                 if (componentMeta.title) {
-                    if (componentMeta.useWholeTitle) {
+                    if (componentMeta.useTitleOnly) {
                         title = componentMeta.title
                     } else {
                         title = `${componentMeta.title} | ${siteName}`
