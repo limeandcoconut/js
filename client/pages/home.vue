@@ -130,7 +130,7 @@
                 "Hey! If you're a good developer why isn't this very fancy?"
                 <br>
                 <br>
-                It's a minimalist thing. All the fancy is in the quality of execution.
+                It's a minimalism thing. All the fancy is in the quality of execution.
             </div>
         </div>
 
