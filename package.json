@@ -41,6 +41,7 @@
         "spdy": "^3.4.7",
         "sw-precache-webpack-plugin": "^0.11.5",
         "vue": "^2.5.17",
+        "vue-analytics": "^5.16.1",
         "vue-loader": "^15.4.2",
         "vue-router": "^3.0.1",
         "vue-server-renderer": "^2.5.17",
