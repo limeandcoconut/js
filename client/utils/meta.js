@@ -5,7 +5,9 @@ export default (siteName) => {
      * @return {Boolean}     I'm not really sure
      */
     function getMeta(vm) {
-        const {meta} = vm.$options
+        const {
+            meta,
+        } = vm.$options
         if (meta) {
             return typeof meta === 'function' ? meta.call(vm) : meta
         }
@@ -13,32 +15,40 @@ export default (siteName) => {
 
     const serverMetaMixin = {
         created() {
-            const componentMeta = getMeta(this)
-            if (componentMeta) {
-                let meta = {
-                    title: siteName,
-                    description: '',
-                    card: '',
-                    robots: '',
-                }
-
-                if (componentMeta.title) {
-                    if (componentMeta.useWholeTitle) {
-                        meta.title = componentMeta.title
-                    } else {
-                        meta.title = `${componentMeta.title} | ${siteName}`
+            if (this.$ssrContext) {
+                // If no Meta has been created yet create one. Otherwise don't to avoid overwriting it if set by another component
+                if (!this.$ssrContext.meta) {
+                    this.$ssrContext.meta = {
+                        title: siteName,
                     }
                 }
 
-                if (componentMeta.description) {
-                    meta.description = `<meta name="description" content="${componentMeta.description}">`
-                }
+                // If the component has a meta section, use those values
+                const componentMeta = getMeta(this)
+                if (componentMeta) {
+                    if (componentMeta.title) {
+                        if (componentMeta.useWholeTitle) {
+                            this.$ssrContext.meta.title = componentMeta.title
+                        } else {
+                            this.$ssrContext.meta.title = `${componentMeta.title} | ${siteName}`
+                        }
+                    }
 
-                if (componentMeta.noIndex) {
-                    meta.robots = '<meta name="robots" content="noindex, nofollow">'
-                }
+                    if (componentMeta.description) {
+                        this.$ssrContext.meta.description = `<meta name="description" content="${componentMeta.description}">`
+                        this.$ssrContext.meta.ogDescription = `<meta property="og:description" content="${componentMeta.description}">`
+                        this.$ssrContext.meta.twitterDescription = `<meta name="twitter:description" content="${componentMeta.description}">`
+                    }
 
-                this.$ssrContext.meta = meta
+                    if (componentMeta.image) {
+                        this.$ssrContext.meta.ogImage = `<meta property="og:image" content="${componentMeta.image}">`
+                        this.$ssrContext.meta.twitterImage = `<meta property="twitter:image" content="${componentMeta.image}">`
+                    }
+
+                    if (componentMeta.noIndex) {
+                        this.$ssrContext.meta.robots = '<meta name="robots" content="noindex, nofollow">'
+                    }
+                }
             }
         },
     }
