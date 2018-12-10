@@ -4,31 +4,32 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{meta.title}}</title>
-
         {{{meta.description}}}
-        <meta property="og:title" content="{{meta.title}}">
-        <meta property="og:description" content="{{meta.description}}">
-        <!-- <meta property="og:image" content="/icons/favicon-16x16.png"> -->
-        <!-- <meta property="og:image" content="{{meta.card}}"> -->
-        <meta property="og:url" content="{{ fullUrl }}">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="@limeandcoconut">
-        <meta name="twitter:creator" content="@limeandcoconut">
-        <meta name="twitter:title" content="{{meta.title}}">
-        <meta name="twitter:description" content="{{meta.description}}">
-        <!-- <meta name="twitter:image" content="/path/to/image.png"> -->
+        <meta name="author" content="Jacob Smith">
+
         {{{meta.robots}}}
 
-        <meta name="author" content="Jacob Smith">
-        <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png?v=0">
-        <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png?v=0">
         <link rel="manifest" href="/manifest.json">
         <meta name="theme-color" content="#D01420" id="theme_color">
         <meta name="msapplication-TileColor" content="#D01420">
         <meta name="msapplication-TileImage" content="/icons/w_168.png">
-
+        <link rel="shortcut icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png?v=0">
+        <link rel="shortcut icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png?v=0">
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png?v=0">
         <link rel="mask-icon" href="/icons/safari-pinned-tab.svg?v=0" color="##D01420">
+
+        <meta property="og:title" content="{{meta.title}}">
+        {{{meta.ogDescription}}}
+        {{meta.ogImage}}
+        <meta property="og:url" content="{{ fullUrl }}">
+
+        {{{meta.twitterDescription}}}
+        {{{meta.twitterImage}}}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@limeandcoconut">
+        <meta name="twitter:creator" content="@limeandcoconut">
+        <meta name="twitter:title" content="{{meta.title}}">
+
 
         {{{ renderStyles() }}}
     </head>
@@ -39,9 +40,15 @@
         {{{ renderScripts() }}}
     </body>
 
-<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<link rel="preload" href="https://fonts.gstatic.com/s/rubikmonoone/v6/UqyJK8kPP3hjw6ANTdfRk9YSN983TKUJcOj8.woff2" as="font" crossorigin>
-<link rel="preload" href="https://fonts.gstatic.com/s/rubik/v7/iJWHBXyIfDnIV7Eyjmmd8WD07oB-.woff2" as="font" crossorigin>
-<link rel="preload" href="https://fonts.gstatic.com/s/rubik/v7/iJWKBXyIfDnIV7nBrXyw023e.woff2" as="font" crossorigin>
+<!-- Preloading technique -->
+<!-- https://ashton.codes/preload-google-fonts-using-resource-hints/ -->
+<!-- A service to get files for any google font -->
+<!-- https://google-webfonts-helper.herokuapp.com/fonts/rubik?subsets=latin -->
+<link rel="preload" href="/fonts/rubik-v7-latin-regular.woff2" as="font">
+<link rel="preload" href="/fonts/rubik-v7-latin-500.woff2" as="font">
+<link rel="preload" href="/fonts/rubik-mono-one-v6-latin-regular.woff2" as="font">
+<link rel="preload" href="/fonts/rubik-v7-latin-regular.woff" as="font">
+<link rel="preload" href="/fonts/rubik-v7-latin-500.woff" as="font">
+<link rel="preload" href="/fonts/rubik-mono-one-v6-latin-regular.woff" as="font">
 
 </html>
