@@ -159,7 +159,7 @@ export default {
             title: 'Jacob Smith | Javascript Fungineer',
             useWholeTitle: true,
             description: 'Full Stack Web Developer, Check out my Github or email me.',
-            card: '/images/logo.png'
+            image: '/images/logo.png'
         }
     },
     mounted() {
