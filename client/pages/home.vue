@@ -127,10 +127,15 @@
                 </div>
             </div>
             <div class="contents backface">
-                "Hey! If you're a good developer why isn't this very fancy?"
-                <br>
-                <br>
-                It's a minimalism thing. All the fancy is in the quality of execution.
+                <div class="column">
+                    <div class="half">
+                        "Hey! If you're a good developer why isn't this very fancy?"
+                    </div>
+                    <div class="half">
+                        It's a minimalism thing. All the fancy is in the quality of execution.
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -319,6 +324,8 @@ export default {
         text-align: center;
 
         &.backface {
+            // background: linear-gradient(dimgrey 0%, dimgrey 50%, white 50%, white 100%);
+            background: linear-gradient(white 0%, white 50%, dimgrey 50%, dimgrey 100%);
             background-color: black;
             display: flex;
             flex-direction: column;
@@ -330,6 +337,14 @@ export default {
             line-height: 1.2;
             text-align: center;
             padding: 1em;
+
+            .half {
+                height: 50%;
+
+                & + .half {
+                    height: 50%;
+                }
+            }
         }
 
         .column {
