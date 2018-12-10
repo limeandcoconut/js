@@ -1,11 +1,11 @@
 {
-    "short_name": "My Site",
-    "name": "My Site Name",
-    "description": "My Site",
+    "short_name": "Jacob Smith",
+    "name": "Jacob Smith",
+    "description": "Javascript Fungineer, Full Stack Web Developer, Check out my Github or email me.",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#3c3333",
-    "theme_color": "#3c3333",
+    "background_color": "#D01420",
+    "theme_color": "#D01420",
     "icons": [{
         "src": "icons/48.png",
         "sizes": "48x48",
