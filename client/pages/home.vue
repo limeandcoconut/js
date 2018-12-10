@@ -255,12 +255,10 @@ export default {
 
 .card {
     .ratio(7, 4);
-    background: linear-gradient(white 0%, white 60%, dimgrey 60%, dimgrey 100%);
     grid-column: 2 / 1;
     justify-self: stretch;
     position: relative;
     top: -9px;
-    box-shadow: @dimgred 18px 18px 1px 8px;
     transform-style: preserve-3d;
     transform-origin: center right;
     transform: translateZ(0) scale(.999, .999);
@@ -273,9 +271,27 @@ export default {
         width: 90%;
     }
 
+    &::before {
+        content: ' ';
+        position: absolute;
+        background-color: @dimgred;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        box-shadow: @dimgred 0px 0px 1px 8px;
+        transform-style: preserve-3d;
+        transform-origin: center right;
+        transform: translate3D(18px, 18px, -1px) scale(.999, .999);
+        transition:
+            transform 2s step-start .02s;
+    }
+
     &.card--flipped {
-        box-shadow: @dimgred -18px 18px 1px 8px;
         transform: translateX(-100%) rotateY(-180deg);
+
+        &::before {
+            transform: translate3D(-18px, 18px, 0) scale(.999, .999);
+        }
 
         .contents {
             background-color: black;
@@ -286,6 +302,7 @@ export default {
     }
 
     .contents {
+        background: linear-gradient(white 0%, white 60%, dimgrey 60%, dimgrey 100%);
         position: absolute;
         top: 0;
         bottom: 0;
