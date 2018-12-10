@@ -37,7 +37,6 @@ export default (siteName) => {
                     if (componentMeta.description) {
                         this.$ssrContext.meta.description = `<meta name="description" content="${componentMeta.description}">`
                         this.$ssrContext.meta.ogDescription = `<meta property="og:description" content="${componentMeta.description}">`
-                        this.$ssrContext.meta.twitterDescription = `<meta name="twitter:description" content="${componentMeta.description}">`
                     }
 
                     if (componentMeta.image) {
