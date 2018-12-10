@@ -1,5 +1,4 @@
 ## Gettings started
-Run eject.sh to start a fresh git history for your own project.
 Run ```npm run dev``` to start webpacking and serving to localhost:3005
 
 ## Npm Scripts
@@ -19,8 +18,7 @@ For deployment, using HAProxy via the included config is also reccomended.
 Customize config.js  
 Customize public/manifest.json  
 Add icons  
-Author in index.template.html  
-theme color in index.template.html  
+Author, colors, twitter names in index.template.html  
 
 ## Notes
 In components use relative urls for images.
