@@ -18,35 +18,37 @@ let config = {
         filename: '[name]-bundle.js',
     },
     module: {
-        rules: [
-            {
-                test: /\.js$/,
-                use: ['babel-loader'],
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.vue$/,
-                use: 'vue-loader',
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    'vue-style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {minimize: isProduction, sourceMap: !isProduction},
+        rules: [{
+            test: /\.js$/,
+            use: ['babel-loader'],
+            exclude: /node_modules/,
+        },
+        {
+            test: /\.vue$/,
+            use: 'vue-loader',
+        },
+        {
+            test: /\.less$/,
+            use: [
+                'vue-style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        minimize: isProduction,
+                        sourceMap: !isProduction,
                     },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: () => [require('autoprefixer')({
-                                browsers: ['> 1%', 'last 3 versions'],
-                            })],
-                        },
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: () => [require('autoprefixer')({
+                            browsers: ['> 1%', 'last 2 versions'],
+                        })],
                     },
-                    'less-loader',
-                ],
-            },
+                },
+                'less-loader',
+            ],
+        },
         ],
     },
     plugins: [
