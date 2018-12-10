@@ -163,10 +163,9 @@ export default {
         }
     },
     mounted() {
-        console.log('started')
         document.fonts.ready.then(() => {
             this.fontsLoaded = true
-        });
+        })
     },
     methods: {
         flip() {
