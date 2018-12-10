@@ -7,12 +7,7 @@ const createRenderer = (serverBundle, clientManifest, template) => {
         template,
         clientManifest,
         inject: false,
-        // This means that store, app, and everything else should be NON STATEFUL. Factories.
         runInNewContext: false,
-        // cache: require('lru-cache')({
-        //     max: 1000,
-        //     maxAge: 1000 * 60 * 15,
-        // }),
     })
 }
 
@@ -23,14 +18,17 @@ const ssrRenderer = function(clientManifest, serverBundle, template) {
         let doCompress = accepts(req).encoding(['br'])
         res.setHeader('Content-Type', 'text/html')
 
-        const fullUrl = 'https://' + req.get('host') + req.originalUrl
-
         let stream = renderer.renderToStream(context)
         stream.on('error', (err) => {
             if (err.code === 404) {
+                // Things failed. Recursively re-render 404.
                 res.statusCode = 404
-                render(req, res, {url: '/404', fullUrl})
+                render(req, res, {
+                    url: '/404',
+                    fullUrl: 'https://' + req.headers.host + req.url,
+                })
             } else {
+                // TODO: Shouldn't this be a 500?
                 console.error(err)
                 res.send('Unknown error rendering content')
             }
