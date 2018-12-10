@@ -170,7 +170,6 @@ export default {
     methods: {
         flip() {
             this.flipped = !this.flipped
-            console.log('yo')
         }
     },
 }
