@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Four Oh Four
+    <div class="layout">
+        404
     </div>
 </template>
 
@@ -14,3 +14,31 @@ export default {
     },
 }
 </script>
+<style lang="less">
+@import '../styles/mixins.less';
+@import '../styles/global.less';
+
+.layout {
+    background-color: @red;
+    .rmn();
+    font-size: .basis(10)[];
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+
+    .above(440px; {
+        font-size: .basis(20)[];
+    });
+
+    .above(sm; {
+        font-size: .basis(30)[];
+    });
+
+    .above(md; {
+        font-size: .basis(40)[];
+    });
+}
+</style>
