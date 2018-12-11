@@ -46,6 +46,10 @@ export default (siteName) => {
                         if (componentMeta.imageAlt) {
                             this.$ssrContext.meta.twitterImageAlt = `<meta property="twitter:image:alt" content="${componentMeta.imageAlt}">`
                         }
+
+                        if (componentMeta.imageWidth && componentMeta.imageHeight) {
+                            this.$ssrContext.meta.ogImageSize = `<meta property="og:image:width" content="${componentMeta.imageWidth}">\n<meta property="og:image:height" content="${componentMeta.imageHeight}">`
+                        }
                     }
 
                     if (componentMeta.noIndex) {

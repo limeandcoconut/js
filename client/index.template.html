@@ -21,6 +21,7 @@
         <meta property="og:title" content="{{meta.title}}">
         {{{meta.ogDescription}}}
         {{{meta.ogImage}}}
+        {{{meta.ogImageSize}}}
         <meta property="og:url" content="{{ fullUrl }}">
 
         {{{meta.twitterImage}}}
@@ -32,9 +33,9 @@
         <!-- https://ashton.codes/preload-google-fonts-using-resource-hints/ -->
         <!-- A service to get files for any google font -->
         <!-- https://google-webfonts-helper.herokuapp.com/fonts/rubik?subsets=latin -->
-        <link rel="preload" href="/fonts/rubik-v7-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="/fonts/rubik-v7-latin-500.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="/fonts/rubik-mono-one-v6-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://fonts.gstatic.com/s/rubik/v7/iJWKBXyIfDnIV7nBrXyw023e.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://fonts.gstatic.com/s/rubik/v7/iJWHBXyIfDnIV7Eyjmmd8WD07oB-.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://fonts.gstatic.com/s/rubikmonoone/v6/UqyJK8kPP3hjw6ANTdfRk9YSN983TKUJcOj8.woff2" as="font" type="font/woff2" crossorigin>
 
         {{{ renderStyles() }}}
     </head>

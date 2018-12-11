@@ -159,7 +159,9 @@ export default {
             title: 'Jacob Smith | JavaScript Fungineer',
             useWholeTitle: true,
             description: 'Full Stack Web Developer, Check out my Github or email me.',
-            image: 'https://jacobsmith.tech/images/logo-twitter.png',
+            image: 'https://jacobsmith.tech/images/logo-og.png',
+            imageWidth: '1200',
+            imageHeight: '628',
             imageAlt: 'A play off of the JavaScript logo using my color scheme and the font Rubik. J.S. are my initials.',
         }
     },
@@ -206,24 +208,33 @@ export default {
         flex-direction: column;
     }
 
-    // // :not(.logo) {
-    //     //     display: none;
-    // // }
+    // :not(.logo) {
+    //         display: none;
+    // }
 
     // .logo {
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
     //     display: none;
-    //     // .ratio(1, 1, pse);
-    //     width: 60vw;
-    //     height: 60vw;
-    //     border: 2px solid dimgrey;
-    //     // .rmn();
+    //     // width: 1080px;
+    //     // height: 1080px;
+    //     // font-size: .basis(75)[];
+    //     // align-items: flex-end;
+    //     // padding: 75px 85px;
+
+    //     width: 1200px;
+    //     height: 628px;
     //     font-size: .basis(63)[];
+    //     align-items: center;
+    //     padding: 75px 85px;
+    //     padding-top: 78px;
+
+    //     outline: 2px solid dimgrey;
     //     display: flex;
-    //     align-items: flex-end;
     //     justify-content: flex-end;
     //     line-height: 0.78em;
     //     font-weight: 600;
-    //     padding: 0 90px 60px 0;
     //     letter-spacing: -0.06em;
     // }
 
