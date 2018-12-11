@@ -23,3 +23,11 @@ Author, colors, twitter names in index.template.html
 ## Notes
 When you update the site to have more pages *UPDATE THE REL CANONICAL.*
 In components use relative urls for images.
+
+### Fonts
+
+Preloading Fonts
+https://ashton.codes/preload-google-fonts-using-resource-hints/
+
+Getting local copies of Google Fonts
+https://google-webfonts-helper.herokuapp.com
