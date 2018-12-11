@@ -271,7 +271,7 @@ export default {
     transform-origin: center right;
     transform: translateZ(0) scale(.999, .999);
     transition:
-        transform 1s cubic-bezier(1.000, 0.025, .9100, -0.06);
+        transform .5s cubic-bezier(1, 0.03, 0.74, 0.12);
     font-smoothing: antialiased !important;
 
 
@@ -319,7 +319,7 @@ export default {
         transform-origin: center right;
         transform: translate3D(18px, 18px, -1px) scale(.999, .999);
         transition:
-            transform 1s cubic-bezier(1.000, 0.025, .9100, -0.06);
+            transform .5s cubic-bezier(1, 0.03, 0.74, 0.12);
     }
 
     &.card--flipped {
