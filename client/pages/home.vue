@@ -11,7 +11,7 @@
                     </h1>
                     <div class="half">
                         <div class="line hidden-small">
-                            <h2 class="aria-visible">Javascript Fungineer (Engineer)</h2>
+                            <h2 class="aria-visible">JavaScript Fungineer (Engineer)</h2>
                             <span class="aria-hidden" aria-hidden="true">
                                 <span class="char">J</span>
                                 <span class="char">a</span>
@@ -156,10 +156,11 @@ export default {
     },
     meta() {
         return {
-            title: 'Jacob Smith | Javascript Fungineer',
+            title: 'Jacob Smith | JavaScript Fungineer',
             useWholeTitle: true,
             description: 'Full Stack Web Developer, Check out my Github or email me.',
-            image: '/images/logo.png'
+            image: '/images/logo.png',
+            imageAlt: 'A play off of the JavaScript logo using my color scheme and the font Rubik. J.S. are my initials.',
         }
     },
     mounted() {
