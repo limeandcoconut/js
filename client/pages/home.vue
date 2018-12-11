@@ -159,7 +159,7 @@ export default {
             title: 'Jacob Smith | JavaScript Fungineer',
             useWholeTitle: true,
             description: 'Full Stack Web Developer, Check out my Github or email me.',
-            image: '/images/logo.png',
+            image: 'https://jacobsmith.tech/images/logo.png',
             imageAlt: 'A play off of the JavaScript logo using my color scheme and the font Rubik. J.S. are my initials.',
         }
     },
@@ -271,7 +271,7 @@ export default {
     transform-origin: center right;
     transform: translateZ(0) scale(.999, .999);
     transition:
-        transform 2s cubic-bezier(0.04, 1, 0.01, 1);
+        transform 1s cubic-bezier(1.000, 0.025, .9100, -0.06);
     font-smoothing: antialiased !important;
 
 
@@ -285,7 +285,7 @@ export default {
             align-content: center;
             align-items: center;
             justify-items: center;
-            justify-content: center
+            justify-content: center;
         }
 
         .line, .link {
@@ -319,7 +319,7 @@ export default {
         transform-origin: center right;
         transform: translate3D(18px, 18px, -1px) scale(.999, .999);
         transition:
-            transform 2s step-start .02s;
+            transform 1s cubic-bezier(1.000, 0.025, .9100, -0.06);
     }
 
     &.card--flipped {
