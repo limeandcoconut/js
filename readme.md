@@ -21,4 +21,5 @@ Add icons
 Author, colors, twitter names in index.template.html  
 
 ## Notes
+When you update the site to have more pages *UPDATE THE REL CANONICAL.*
 In components use relative urls for images.
