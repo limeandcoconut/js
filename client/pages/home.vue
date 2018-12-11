@@ -157,12 +157,13 @@ export default {
     meta() {
         return {
             title: 'Jacob Smith | JavaScript Fungineer',
-            useWholeTitle: true,
-            description: 'Full Stack Web Developer, Check out my Github or email me.',
+            useTitleOnly: true,
+            description: 'Full Stack Web Developer, Check out my Github or email me. 🍻',
             image: 'https://jacobsmith.tech/images/logo-og.png',
             imageWidth: '1200',
             imageHeight: '628',
-            imageAlt: 'A play off of the JavaScript logo using my color scheme and the font Rubik. J.S. are my initials.',
+            imageAlt: 'A play off of the JavaScript logo using my color scheme and the font Rubik. J.S. is my initials.',
+            relCanonical: 'https://jacobsmith.tech',
         }
     },
     mounted() {

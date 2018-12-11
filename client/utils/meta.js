@@ -52,6 +52,10 @@ export default (siteName) => {
                         }
                     }
 
+                    if (componentMeta.relCanonical && componentMeta.relCanonical.length > 3) {
+                        this.$ssrContext.meta.relCanonical = `<link rel="canonical" href="${componentMeta.relCanonical}" />`
+                    }
+
                     if (componentMeta.noIndex) {
                         this.$ssrContext.meta.robots = '<meta name="robots" content="noindex, nofollow">'
                     }
