@@ -140,7 +140,7 @@
             </div>
         </div>
 
-        <button class="tag" @click="flip" type="button">
+        <button class="tag" @click="flip" type="button" :class="{'tag--visible': showTag}">
             FLIP
         </button>
     </div>
@@ -152,6 +152,7 @@ export default {
     data() {
         return {
             flipped: false,
+            showTag: false,
         }
     },
     meta() {
@@ -165,6 +166,9 @@ export default {
             imageAlt: 'A play off of the JavaScript logo using my color scheme and the font Rubik. J.S. is my initials.',
             relCanonical: 'https://jacobsmith.tech',
         }
+    },
+    mounted() {
+        this.showTag = true
     },
     methods: {
         flip() {
@@ -254,6 +258,8 @@ export default {
     cursor: pointer;
     font-weight: bold;
     font-size: @min-base * 2px;
+    opacity: 0;
+    // transition: 0.1s cubic-bezier(1, 0.03, 0.74, 0.12) opacity;
 
     .above(480px; {
         font-size: .basis(2)[];
@@ -265,7 +271,11 @@ export default {
         margin-top: 20%;
         bottom: auto;
         left: auto;
-    })
+    });
+
+    &.tag--visible {
+        opacity: 1;
+    }
 }
 
 .card {
@@ -279,6 +289,7 @@ export default {
     transform: translateZ(0) scale(.999, .999);
     transition:
         transform .5s cubic-bezier(1, 0.03, 0.74, 0.12);
+
     font-smoothing: antialiased !important;
 
 
