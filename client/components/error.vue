@@ -30,7 +30,6 @@ export default {
 
 <style lang="less">
 @import '../styles/mixins.less';
-@import '../styles/global.less';
 
 .error-box {
     text-align: center;

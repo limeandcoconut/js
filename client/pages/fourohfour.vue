@@ -16,7 +16,6 @@ export default {
 </script>
 <style lang="less">
 @import '../styles/mixins.less';
-@import '../styles/global.less';
 
 .layout {
     background-color: @red;

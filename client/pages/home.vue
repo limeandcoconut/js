@@ -1,8 +1,9 @@
 <template>
     <div class="layout">
+        <div id="fontTest" class="font-test">mmmmmmmmmm</div>
         <!-- <div class="logo">JS</div> -->
 
-        <div class="card" :class="{'card--flipped': flipped, 'fonts-loaded': fontsLoaded}">
+        <div id="card" class="card" :class="{'card--flipped': flipped}">
             <div class="contents">
                 <div class="column">
                     <h1 class="half">
@@ -151,7 +152,6 @@ export default {
     data() {
         return {
             flipped: false,
-            fontsLoaded: false,
         }
     },
     meta() {
@@ -166,11 +166,6 @@ export default {
             relCanonical: 'https://jacobsmith.tech',
         }
     },
-    mounted() {
-        document.fonts.ready.then(() => {
-            this.fontsLoaded = true
-        })
-    },
     methods: {
         flip() {
             this.flipped = !this.flipped
@@ -181,7 +176,6 @@ export default {
 
 <style lang="less">
 @import '../styles/mixins.less';
-@import '../styles/global.less';
 
 .layout {
     background-color: @red;
@@ -254,7 +248,8 @@ export default {
     min-width: 30%;
     // box-shadow: @lessdimgred 1px 1px 1px 0px;
     // box-shadow: @lessdimgred 20px 20px 40px -10px;
-    box-shadow: @lessdimgred 1px 4px 2px 0px;
+    // box-shadow: @lessdimgred 1px 4px 2px 0px;
+    box-shadow: @lessdimgred 1px 2px 3px 1px;
     text-align: center;
     cursor: pointer;
     font-weight: bold;
@@ -595,6 +590,18 @@ export default {
 
 .aria-visible {
     .aria-visible();
+}
+
+
+.font-test {
+    .aria-visible();
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    width: auto;
+    height: 12px;
+    .rubik();
+    font-size: 12px;
 }
 
 </style>
