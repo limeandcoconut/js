@@ -297,34 +297,6 @@ export default {
         width: 90%;
     }
 
-    &:not(.fonts-loaded) {
-        .column {
-            width: 100%;
-            align-content: center;
-            align-items: center;
-            justify-items: center;
-            justify-content: center;
-        }
-
-        .line, .link {
-            &:last-child {
-
-                display: block;
-                width: auto;
-            }
-        }
-        .half {
-            & + .half {
-                width: auto;
-                left: 50%;
-                transform: translateX(-50%)
-            }
-        }
-        .title {
-            font-weight: bold;
-        }
-    }
-
     &::before {
         content: ' ';
         position: absolute;

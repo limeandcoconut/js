@@ -39,6 +39,33 @@
         <link rel="preload" href="https://fonts.gstatic.com/s/rubikmonoone/v6/UqyJK8kPP3hjw6ANTdfRk9YSN983TKUJcOj8.woff2" as="font" type="font/woff2" crossorigin>
 
         {{{ renderStyles() }}}
+
+        <style id="preFontStyles" type="text/css">
+            .layout .column {
+                width: 100%;
+                align-content: center;
+                align-items: center;
+                justify-items: center;
+                justify-content: center;
+            }
+            .line:last-child {
+                display: block;
+                width: auto;
+            }
+            .link:last-child {
+                display: block;
+                width: auto;
+            }
+            .half + .half {
+                width: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .title {
+                font-weight: bold;
+            }
+        </style>
+
     </head>
     <body>
         <!--vue-ssr-outlet-->
@@ -47,11 +74,11 @@
         {{{ renderScripts() }}}
 
         <script type="text/javascript">
-            // fontTest and card are divs with ids
+            // fontTest and preFontStyles are divs with ids
             let fontTestWidth = fontTest.clientWidth
             document.fonts.ready.then(() => {
                 if (fontTest.clientWidth !== fontTestWidth) {
-                    card.classList.add('fonts-loaded')
+                    preFontStyles.remove()
                 }
             })
         </script>
