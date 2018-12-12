@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <div id="fontTest" class="font-test">mmmmmmmmmm</div>
+        <div id="fontTest" class="font-test" aria-hidden="true">mmmmmmmmmm</div>
         <!-- <div class="logo">JS</div> -->
 
         <div id="card" class="card" :class="{'card--flipped': flipped}">
