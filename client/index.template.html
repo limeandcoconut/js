@@ -45,5 +45,15 @@
 
         {{{ renderState() }}}
         {{{ renderScripts() }}}
+
+        <script type="text/javascript">
+            // fontTest and card are divs with ids
+            let fontTestWidth = fontTest.clientWidth
+            document.fonts.ready.then(() => {
+                if (fontTest.clientWidth !== fontTestWidth) {
+                    card.classList.add('fonts-loaded')
+                }
+            })
+        </script>
     </body>
 </html>
