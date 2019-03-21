@@ -31,3 +31,10 @@ https://ashton.codes/preload-google-fonts-using-resource-hints/
 
 Getting local copies of Google Fonts
 https://google-webfonts-helper.herokuapp.com
+
+### Todos
+- [ ] Update readme and dotfiles
+- [ ] Change link underline to use text-decoration-colors
+- [ ] Add portfolio
+- [ ] Add postcss
+- [ ] Add miami theme
