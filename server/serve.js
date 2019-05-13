@@ -24,7 +24,7 @@ app.use('/', expressStaticGzip(path.resolve(__dirname, '../', 'public'), {
 // Serve compiled resources
 app.use('/dist/', expressStaticGzip(path.resolve(__dirname, '../', 'dist'), {
     enableBrotli: true,
-    indexFromEmptyFile: false,
+    index: false,
 }))
 
 let render
