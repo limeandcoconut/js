@@ -66,11 +66,18 @@ if (isProduction) {
             runtimeCaching: [{
                 urlPattern: '/*',
                 handler: 'networkFirst',
+                // Options:
+                // cacheFirst
+                // fastest
+                // networkOnly
+                // cacheOnly
+                // Why u no slowest()?
             }],
             staticFileGlobs: [
                 'dist/**.css',
                 'dist/img/**.*',
                 'dist/**.js',
+                // TODO: cache fonts?
             ],
             // Don't allow the service worker to try to cache google analytics or your tracking will stop working
             // Disable any other scripts you don't want cached here as well
