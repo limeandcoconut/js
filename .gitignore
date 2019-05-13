@@ -17,8 +17,8 @@ keys.js*
 .DS_Store
 
 # Various dist/build directories
-# dist/*
-build/*
+dist/*
+# build/*
 # public/*
 
 # Workspace specific editor files
