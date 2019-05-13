@@ -21,6 +21,13 @@
 - [ ] Find a better css reset
 - [ ] Compress more assets in public like fonts and icons
 - [ ] Strip all GZip compression and go to all brotli
+- [ ] Update to new rubik, remove woff
+- [ ] Add better postcss
+- [ ] Add portfolio
+- [ ] Add WebpackDevServerUtils.choosePort to projects
+- [ ] Add Sitemap and Robots from recat
+- [ ] [Fix icons and stuff](https://realfavicongenerator.net)
+- [ ] Add <base>
 
 # Watch
 Css extraction currently isn't available. Follow these threads for updates:
