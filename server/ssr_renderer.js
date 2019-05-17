@@ -36,10 +36,9 @@ const ssrRenderer = function(clientManifest, serverBundle, template) {
 
         if (doCompress) {
             res.setHeader('Content-Encoding', 'br')
-            stream.pipe(compressStream()).pipe(res)
-        } else {
-            stream.pipe(res)
+            stream = stream.pipe(compressStream())
         }
+        stream.pipe(res)
     }
 
     return render

@@ -67,6 +67,7 @@ module.exports = function(app, cb) {
         cbIfReady()
     })
 
+    // Switch to promises
     /**
      * Callback when the client compiler has compiled the clientManifest and template
      * And the server compiler has compiled the serverBundle

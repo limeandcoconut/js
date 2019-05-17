@@ -4,9 +4,7 @@ const express = require('express')
 const helmet = require('helmet')
 const expressStaticGzip = require('express-static-gzip')
 const app = express()
-const {
-    frontendPort,
-} = require('../config.js')
+const {frontendPort} = require('../config.js')
 const isDevelopment = (process.env.NODE_ENV === 'development')
 
 // Apply some useful plugins like helmet (security) and bodyParser (post param decoding)

@@ -38,3 +38,8 @@ https://google-webfonts-helper.herokuapp.com
 - [ ] Add portfolio
 - [ ] Add postcss
 - [ ] Add miami theme
+
+<a href="https://dev.to/limeandcoconut">
+  <img src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="Jacob Smith's DEV Profile" height="30" width="30" />
+</a>
+      
