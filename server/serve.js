@@ -5,7 +5,7 @@ const helmet = require('helmet')
 const expressStaticGzip = require('express-static-gzip')
 const app = express()
 const {frontendPort} = require('../config.js')
-const isDevelopment = (process.env.NODE_ENV === 'development')
+const isDevelopment = (process.env.NODE_ENV === 'development' || true)
 
 // Apply some useful plugins like helmet (security) and bodyParser (post param decoding)
 app.use(helmet())
@@ -27,10 +27,6 @@ app.use('/dist/', expressStaticGzip(path.resolve(__dirname, '../', 'dist'), {
 
 let render
 
-/**
- * @function getRenderer
- * @return {function} An instance of the Vue SSR Renderer
- */
 if (isDevelopment) {
     // Set default render in case there is a request before inital pack.
     render = (req, res) => res.send('Compiling, reload in a moment.')

@@ -39,6 +39,10 @@ https://google-webfonts-helper.herokuapp.com
 - [ ] Add postcss
 - [ ] Add miami theme
 
+
+### Caveats
+https://github.com/webpack/webpack/issues/8656#issuecomment-496822882
+
 <a href="https://dev.to/limeandcoconut">
   <img src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="Jacob Smith's DEV Profile" height="30" width="30" />
 </a>

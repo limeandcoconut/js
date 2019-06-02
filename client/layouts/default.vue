@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper default">
         <main>
-            <error></error>
+            <!-- <error></error> -->
 
             <router-view></router-view>
         </main>
@@ -9,11 +9,12 @@
 </template>
 
 <script>
-import error from '../components/error.vue'
+// import error from '../components/error.vue'
 
 export default {
+    name: 'default',
     components: {
-        error,
+        // error,
     },
 }
 </script>
