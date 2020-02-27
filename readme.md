@@ -33,6 +33,7 @@ Getting local copies of Google Fonts
 https://google-webfonts-helper.herokuapp.com
 
 ### Todos
+- [ ] Fix issue with reloading and fonts
 - [ ] Update readme and dotfiles
 - [ ] Change link underline to use text-decoration-colors
 - [ ] Add portfolio

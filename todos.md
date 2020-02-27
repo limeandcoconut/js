@@ -1,4 +1,6 @@
 # Todos
+- [ ] https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0
+<!-- When serializing state on the server to be sent to the client, you need to serialize in a way that escapes HTML entities. This is because you’re often no longer using React to create this string, hence not having the string automatically escaped. -->
 - [ ] Server should reload the files used for render when they update
        This could be via checking meta data on the files or a method triggered by a route
 - [ ] More things in meta should be pulled from config (Author, theme-color, etc)
