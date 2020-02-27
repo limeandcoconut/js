@@ -1,8 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const MFS = require('memory-fs')
-const clientConfig = require('../build/webpack.client.config.js')
-const serverConfig = require('../build/webpack.server.config')
+const clientConfig = require('../config/webpack.client.config.js')
+const serverConfig = require('../config/webpack.server.config.js')
 
 module.exports = function(app, cb) {
     let serverBundle
