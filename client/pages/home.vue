@@ -140,7 +140,7 @@
             </div>
         </div>
 
-        <button class="tag" @click="flip" type="button" :class="{'tag--visible': showTag}">
+        <button class="tag" @click="flipped = !flipped" type="button" :class="{'tag--visible': showTag}">
             FLIP
         </button>
     </div>
@@ -169,11 +169,6 @@ export default {
     },
     mounted() {
         this.showTag = true
-    },
-    methods: {
-        flip() {
-            this.flipped = !this.flipped
-        }
     },
 }
 </script>

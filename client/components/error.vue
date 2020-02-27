@@ -10,20 +10,14 @@
 </template>
 
 <script>
+import {mapState, mapActions} from 'vuex'
 export default {
     name: 'errorBox',
     computed: {
-        showErrorMessage() {
-            return this.$store.state.showErrorMessage
-        },
-        errorMessage() {
-            return this.$store.state.errorMessage
-        },
+        ...mapState(['showErrorMessage', 'errorMessage']),
     },
     methods: {
-        dismissError() {
-            this.$store.dispatch('dismissError')
-        },
+        ...mapActions(['dismissError']),
     },
 }
 </script>

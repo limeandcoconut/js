@@ -16,12 +16,14 @@ export default (context) => {
             }
 
             const matchedComponents = router.getMatchedComponents()
-            Promise.all(matchedComponents.map(({
-                asyncData,
-            }) => asyncData && asyncData({
-                store,
-                route: router.currentRoute,
-            })))
+            Promise.all(
+                matchedComponents.map(
+                    ({asyncData}) => asyncData && asyncData({
+                        store,
+                        route: router.currentRoute,
+                    })
+                )
+            )
             .then(() => {
                 context.state = store.state
                 resolve(app)

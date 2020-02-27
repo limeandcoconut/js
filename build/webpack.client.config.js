@@ -9,11 +9,14 @@ const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-const config = Object.assign({}, base, {
+const config = {
+    ...base,
+
     entry: {
         app: './client/entry_client.js',
     },
-    plugins: (base.plugins || []).concat([
+    plugins: [
+        ...(base.plugins || []),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
             'process.env.VUE_ENV': '"client"',
@@ -25,8 +28,8 @@ const config = Object.assign({}, base, {
             title: 'Webpack Client Build',
             suppressSuccess: true,
         }),
-    ]),
-})
+    ],
+}
 
 if (isProduction) {
     // This automatically takes care of vendor splitting
@@ -71,7 +74,7 @@ if (isProduction) {
                 // fastest
                 // networkOnly
                 // cacheOnly
-                // Why u no slowest()?
+                // Why u no slowest?
             }],
             staticFileGlobs: [
                 'dist/**.css',

@@ -11,7 +11,6 @@ const config = Object.assign({}, base, {
     target: 'node',
     // Point entry to your app's server entry file
     entry: './client/entry_server.js',
-    // TODO research why this is done this way
     // This tells the server bundle to use Node-style exports
     output: Object.assign({}, base.output, {
         libraryTarget: 'commonjs2',
@@ -21,11 +20,12 @@ const config = Object.assign({}, base, {
     // Externalize app dependencies. This makes the server build much faster and generates a smaller bundle file.
     // Do not externalize dependencies that need to be processed by webpack.
     // You can add more file types here e.g. raw *.vue files.
-    // You should also whitelist deps that modifies `global` (e.g. polyfills).
+    // You should also whitelist deps that modify `global` (e.g. polyfills).
     externals: [
         ...Object.keys(require('../package.json').dependencies),
     ],
-    plugins: (base.plugins || []).concat([
+    plugins: [
+        ...(base.plugins || []),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
             'process.env.VUE_ENV': '"server"',
@@ -38,7 +38,7 @@ const config = Object.assign({}, base, {
             title: 'Webpack Server Build',
             suppressSuccess: true,
         }),
-    ]),
+    ],
 })
 
 module.exports = config

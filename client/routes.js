@@ -4,6 +4,15 @@ Vue.use(Router)
 
 import defaultLayout from './layouts/default.vue'
 
+/**
+ * Helper function for loading components
+ * @param  {String} templateName    Name of the component to load
+ * @return {Function<Promise>}      A Promise, in an function, in an enigma
+ */
+const loadPage = (templateName) => {
+    return () => import(`./pages/${templateName}.vue`)
+}
+
 const home = loadPage('home')
 const fourOhFour = loadPage('fourohfour')
 
@@ -17,16 +26,7 @@ const routes = [
     ]},
 ]
 
-/**
- * Helper function for loading components
- * @param  {String} templateName    Name of the component to load
- * @return {Function<Promise>}      A Promise, in an function, in an enigma
- */
-function loadPage(templateName) {
-    return () => import(`./pages/${templateName}.vue`)
-}
-
-let options = {
+const options = {
     mode: 'history',
     routes,
     scrollBehavior(to, from, savedPosition) {

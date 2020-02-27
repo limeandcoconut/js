@@ -2,23 +2,18 @@ const {createBundleRenderer} = require('vue-server-renderer')
 const compressStream = require('iltorb').compressStream
 const accepts = require('accepts')
 
-const createRenderer = (serverBundle, clientManifest, template) => {
-    return createBundleRenderer(serverBundle, {
+const ssrRenderer = function(clientManifest, serverBundle, template) {
+    const renderer = createBundleRenderer(serverBundle, {
         template,
         clientManifest,
         inject: false,
         runInNewContext: false,
     })
-}
-
-const ssrRenderer = function(clientManifest, serverBundle, template) {
-    let renderer = createRenderer(serverBundle, clientManifest, template)
 
     const render = (req, res, context) => {
-        let doCompress = accepts(req).encoding(['br'])
         res.setHeader('Content-Type', 'text/html')
 
-        let stream = renderer.renderToStream(context)
+        const stream = renderer.renderToStream(context)
         stream.on('error', (err) => {
             if (err.code === 404) {
                 // Things failed. Recursively re-render 404.
@@ -34,7 +29,7 @@ const ssrRenderer = function(clientManifest, serverBundle, template) {
             }
         })
 
-        if (doCompress) {
+        if (accepts(req).encoding(['br'])) {
             res.setHeader('Content-Encoding', 'br')
             stream.pipe(compressStream()).pipe(res)
         } else {

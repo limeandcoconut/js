@@ -5,9 +5,7 @@ export default (siteName) => {
      * @return {Boolean}     I'm not really sure
      */
     function getMeta(vm) {
-        const {
-            meta,
-        } = vm.$options
+        const {meta} = vm.$options
         if (meta) {
             return typeof meta === 'function' ? meta.call(vm) : meta
         }
