@@ -4,9 +4,9 @@ import App from './layouts/app.vue'
 import createStore from './store.js'
 import createRouter from './routes.js'
 import meta from './utils/meta.js'
-import {siteName} from '../config.js'
+import siteMeta from '../config/meta.config.js'
 
-Vue.mixin(meta(siteName))
+Vue.mixin(meta(siteMeta))
 
 export default () => {
     const store = createStore()

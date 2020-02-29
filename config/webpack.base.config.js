@@ -4,6 +4,8 @@ const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 const {VueLoaderPlugin} = require('vue-loader')
 const MinifyPlugin = require('babel-minify-webpack-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 // Dev tools
 const Visualizer = require('webpack-visualizer-plugin')
@@ -52,12 +54,16 @@ let config = {
         ],
     },
     plugins: [
+        new CaseSensitivePathsPlugin(),
         new VueLoaderPlugin(),
         new HTMLPlugin({
             template: 'client/index.template.html',
             // Inject false turns off automatic injection of Css and JS
             inject: false,
         }),
+        // Adds some highlighting as sugar
+        // TODO: On trial
+        new FriendlyErrorsWebpackPlugin(),
     ],
     optimization: {},
 }

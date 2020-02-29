@@ -1,4 +1,4 @@
-const base = require('./webpack.base.config')
+const base = require('./webpack.base.config.js')
 
 const webpack = require('webpack')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')

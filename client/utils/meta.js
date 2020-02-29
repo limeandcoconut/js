@@ -1,83 +1,101 @@
-export default (siteName) => {
+const tags = {
+    name: (content) => `<meta name="description" content="${content}" />`,
+    title: (content) => content,
+    author: (content) => `<meta name="author" content="${content}" />`,
+    description: (content) => `<meta name="description" content="${content}" />`,
+    color: (content) => `<meta name="theme-color" content="${content}" id="theme_color" />`,
+    og: {
+        description: (content) => `<meta property="og:description" content="${content}" />`,
+        image: {
+            src: (content) => `<meta property="og:image" content="${content}" />`,
+            width: (content) => `<meta property="og:image:width" content="${content}" /> `,
+            height: (content) => `<meta property="og:image:height" content="${content}" />`,
+        },
+        type: (content) => `<meta property="og:type" content="${content}" />`,
+    },
+    twitter: {
+        creator: (content) => `<meta name="twitter:creator" content="${content}" />`,
+        image: {
+            src: (content) => `<meta property="twitter:image" content="${content}" />`,
+            alt: (content) => `<meta property="twitter:image:alt" content="${content}" />`,
+        },
+        card: (content) => `<meta name="twitter:card" content="${content}" />`,
+    },
+    ms: {
+        color: (content) => `<meta name="msapplication-TileColor" content="${content}" />`
+    },
+    favicons: {
+        default: (content) => `<link rel="shortcut icon" href="${content}" />`,
+        x32: (content) => `<link rel="icon" type="image/png" sizes="32x32" href="${content}" />`,
+        x16: (content) => `<link rel="icon" type="image/png" sizes="16x16" href="${content}" />`,
+        apple: (content) => `<link rel="apple-touch-icon" sizes="180x180" href="${content}" />`,
+        safariMask: (content, {color}) => `<link rel="mask-icon" href="${content}" color="${color}" />`,
+        ms: (content) => `<meta name="msapplication-TileImage" content="${content}" />`,
+    },
+    manifest: (content) => `<link rel="manifest" href="${content}" />`,
+    relCanonical: (content) => `<link rel="canonical" href="${content}" />`,
+    noIndex: () => '<meta name="robots" content="noindex, nofollow" />',
+}
+
+export default (siteMeta) => {
+    siteMeta.useTitleOnly
+
     /**
-     * Get meta from a vue instance
-     * @param  {Object} vm  A vue instance (I think)
-     * @return {Boolean}     I'm not really sure
+     * Get meta from a vue instance, default back to meta.config.js
+     * @function getMeta
+     * @param  {Object} vm  A component to check for meta
+     * @return {Object}     A meta object
      */
-    function getMeta(vm) {
-        const {meta} = vm.$options
-        if (meta) {
-            return typeof meta === 'function' ? meta.call(vm) : meta
+    const getMeta = (vm) => {
+        let {meta = {}} = vm.$options
+        meta = {
+            ...siteMeta,
+            ...typeof meta === 'function' ? meta.call(vm) : meta,
         }
+        // If the component has a meta section, use those values
+        if (meta.title && meta.name && !meta.useTitleOnly) {
+            meta.title = `${meta.title} | ${meta.name}`
+        }
+        return meta
+    }
+
+    /**
+     * Traverse the tags object recursively. Formats values from meta and assigns them to context.
+     * @function traverse
+     * @param  {Object} context         A context object for formatted tags
+     * @param  {Object} tags            A prototype object with formatters for values
+     * @param  {Object} meta            An object containing meta configs
+     * @param  {Object} [rootMeta=meta] The root meta object
+     * @return {Object} The context object
+     */
+    const traverse = (context, tags, meta, rootMeta = meta) => {
+        for (const [key, tag] of Object.entries(tags)) {
+            if (!meta[key]) {
+                continue
+            }
+            if (typeof tag === 'object') {
+                context[key] = traverse(context[key] || {}, tag, meta[key], rootMeta)
+                continue
+            }
+            context[key] = tag(meta[key], rootMeta)
+        }
+        return context
     }
 
     const serverMetaMixin = {
         created() {
             if (this.$ssrContext) {
-                // If no Meta has been created yet create one. Otherwise don't to avoid overwriting it if set by another component
-                if (!this.$ssrContext.meta) {
-                    this.$ssrContext.meta = {
-                        title: siteName,
-                    }
-                }
-
-                // If the component has a meta section, use those values
-                const componentMeta = getMeta(this)
-                if (componentMeta) {
-                    if (componentMeta.title) {
-                        if (componentMeta.useTitleOnly) {
-                            this.$ssrContext.meta.title = componentMeta.title
-                        } else {
-                            this.$ssrContext.meta.title = `${componentMeta.title} | ${siteName}`
-                        }
-                    }
-
-                    if (componentMeta.description) {
-                        this.$ssrContext.meta.description = `<meta name="description" content="${componentMeta.description}">`
-                        this.$ssrContext.meta.ogDescription = `<meta property="og:description" content="${componentMeta.description}">`
-                    }
-
-                    if (componentMeta.image) {
-                        this.$ssrContext.meta.ogImage = `<meta property="og:image" content="${componentMeta.image}">`
-                        this.$ssrContext.meta.twitterImage = `<meta property="twitter:image" content="${componentMeta.image}">`
-
-                        if (componentMeta.imageAlt) {
-                            this.$ssrContext.meta.twitterImageAlt = `<meta property="twitter:image:alt" content="${componentMeta.imageAlt}">`
-                        }
-
-                        if (componentMeta.imageWidth && componentMeta.imageHeight) {
-                            this.$ssrContext.meta.ogImageSize = `<meta property="og:image:width" content="${componentMeta.imageWidth}">\n<meta property="og:image:height" content="${componentMeta.imageHeight}">`
-                        }
-                    }
-
-                    if (componentMeta.relCanonical && componentMeta.relCanonical.length > 3) {
-                        this.$ssrContext.meta.relCanonical = `<link rel="canonical" href="${componentMeta.relCanonical}" />`
-                    }
-
-                    if (componentMeta.noIndex) {
-                        this.$ssrContext.meta.robots = '<meta name="robots" content="noindex, nofollow">'
-                    }
-                }
+                // Traverse the tags object creating a tag for each piece of meta provided and attaching it to the $ssrContext
+                // Don't override meta in case it was set by another component
+                this.$ssrContext.meta = traverse(this.$ssrContext.meta || {}, tags, getMeta(this))
             }
         },
     }
 
     const clientMetaMixin = {
         mounted() {
-            const componentMeta = getMeta(this)
-            if (componentMeta) {
-                let title = siteName
-
-                if (componentMeta.title) {
-                    if (componentMeta.useTitleOnly) {
-                        title = componentMeta.title
-                    } else {
-                        title = `${componentMeta.title} | ${siteName}`
-                    }
-                }
-
-                document.title = title
-            }
+            const {title} = getMeta(this)
+            document.title = title
         },
     }
 

@@ -12,13 +12,25 @@ const isDevelopment = (process.env.NODE_ENV === 'development')
 // Apply some useful plugins like helmet (security) and bodyParser (post param decoding)
 app.use(helmet())
 
-// The caching service worker must be loaded from / to be allowed to cache everything necessary
-app.use('/service-worker.js', express.static(path.resolve(__dirname, '../dist/service-worker.js')))
+// In prod this will be done by HAProxy via rewrites
+if (isDevelopment) {
+    // The caching service worker must be loaded from / to be allowed to cache everything necessary
+    app.use('/service-worker.js', express.static(path.resolve(__dirname, '../dist/proxy_to_site_root/service-worker.js')))
+}
 
 // Serve any static files in public
+// Could also replace with nginx if there's a need
 app.use('/', expressStaticGzip(path.resolve(__dirname, '../', 'public'), {
     enableBrotli: true,
     indexFromEmptyFile: false,
+    serveStatic: {
+        setHeaders(response, path) {
+            // For best results manifest.json must be served with application/manifest+json
+            if (/\/public\/manifest\.json\W?/.test(path)) {
+                response.set('Content-Type', 'application/manifest+json; charset=UTF-8')
+            }
+        },
+    },
 }))
 
 // Serve compiled resources
