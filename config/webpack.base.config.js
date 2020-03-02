@@ -20,37 +20,47 @@ let config = {
         filename: '[name]-bundle.js',
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            use: ['babel-loader'],
-            exclude: /node_modules/,
-        },
-        {
-            test: /\.vue$/,
-            use: 'vue-loader',
-        },
-        {
-            test: /\.less$/,
-            use: [
-                'vue-style-loader',
-                {
-                    loader: 'css-loader',
-                    options: {
-                        minimize: isProduction,
-                        sourceMap: !isProduction,
+        rules: [
+            {
+                test: /\.js$/,
+                use: ['babel-loader'],
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.vue$/,
+                use: 'vue-loader',
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    // This would add css extraction for prod but nix inlining the first chunk.
+                    // isProduction ?
+                    // {
+                    //     loader: ExtractCssChunks.loader,
+                    //     options: {
+                    //         hmr: true,
+                    //     },
+                    // }
+                    // : 'vue-style-loader',
+                    'vue-style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            minimize: isProduction,
+                            sourceMap: !isProduction,
+                        },
                     },
-                },
-                {
-                    loader: 'postcss-loader',
-                    options: {
-                        plugins: () => [require('autoprefixer')({
-                            browsers: ['> 1%', 'last 2 versions'],
-                        })],
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: () => [require('autoprefixer')({
+                                browsers: ['> 1%', 'last 2 versions'],
+                            })],
+                        },
                     },
-                },
-                'less-loader',
-            ],
-        },
+                    'less-loader',
+                ],
+            },
         ],
     },
     plugins: [
@@ -61,6 +71,11 @@ let config = {
             // Inject false turns off automatic injection of Css and JS
             inject: false,
         }),
+        // Also required for prod css extraction
+        // new ExtractCssChunks({
+        //     filename: `[name]${isProduction ? '.[contenthash]' : ''}.css`,
+        //     chunkFilename: `[id]${isProduction ? '.[contenthash]' : ''}.css`,
+        // }),
         // Adds some highlighting as sugar
         // TODO: On trial
         new FriendlyErrorsWebpackPlugin(),

@@ -31,6 +31,7 @@ const config = {
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
             'process.env.VUE_ENV': '"client"',
         }),
+        // For prod css extraction remove this and see webpack.base.config
         new MiniCssExtractPlugin({
             filename: `[name]${isProduction ? '.[contenthash]' : ''}.css`,
             chunkFilename: `[id]${isProduction ? '.[contenthash]' : ''}.css`,

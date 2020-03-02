@@ -38,6 +38,10 @@ const config = Object.assign({}, base, {
             title: 'Webpack Server Build',
             suppressSuccess: true,
         }),
+        // For prod css extraction add this and see webpack.base.config
+        // new webpack.optimize.LimitChunkCountPlugin( {
+        //     maxChunks: 1,
+        // }),
     ],
 })
 
