@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const crypto = require('crypto')
 const express = require('express')
 const expressStaticGzip = require('express-static-gzip')
 const featurePolicy = require('feature-policy')
@@ -24,7 +25,6 @@ if (isDevelopment) {
 } else {
     // Generate a 128 bit pseudo random base 64 nonce
     // https://www.w3.org/TR/CSP2/#nonce_value
-    nonce = require('crypto').randomBytes(16).toString('base64')
 
     // Don't bother with security on dev
     // Setup feature policy
@@ -38,6 +38,11 @@ if (isDevelopment) {
         },
     }))
 
+    app.use(function (request, response, next) {
+        response.locals.nonce = crypto.randomBytes(16).toString('base64')
+        next()
+    })
+
     // Set up content-security-policy
     const contentSelf = ['\'self\'', 'jacobsmith.tech', 'blob:', 'data:']
     const contentAnalytics = ['*.google-analytics.com', 'google-analytics.com']
@@ -46,7 +51,12 @@ if (isDevelopment) {
         directives: {
             defaultSrc: [...contentSelf, ...contentAnalytics],
             // Remember this will need to be updated every time the inline script tag is edited.
-            scriptSrc: [...contentSelf, ...contentAnalytics, `'nonce-${nonce}'`, "'sha256-KfmBIKliAyT0hcce3Q000DjjNOOAiP6NY/LFokeGtoM='"],
+            scriptSrc: [
+                ...contentSelf,
+                ...contentAnalytics,
+                (request, response) => `'nonce-${response.locals.nonce}'`,
+                "'sha256-KfmBIKliAyT0hcce3Q000DjjNOOAiP6NY/LFokeGtoM='",
+            ],
             styleSrc: [...contentSelf, "'unsafe-inline'"],
             fontSrc: [...contentSelf, ...contentFonts],
             imgSrc: [...contentSelf, ...contentAnalytics],
@@ -113,7 +123,7 @@ let render
  */
 if (isDevelopment) {
     // Set default render in case there is a request before inital pack.
-    render = (req, res) => res.send('Compiling, reload in a moment.')
+    render = (request, response) => response.send('Compiling, reload in a moment.')
     // Add hot middleware and create a new render function each time both client and server have finished packing.
     require('./hmr.js')(app, (serverBundle, clientManifest, template) => {
         render = require('./ssr_renderer.js')(clientManifest, serverBundle, template)
@@ -126,19 +136,19 @@ if (isDevelopment) {
     render = require('./ssr_renderer.js')(clientManifest, serverBundle, template)
 }
 
-app.get('*', (req, res) => {
+app.get('*', (request, response) => {
     const context = {
-        url: req.url,
-        fullUrl: 'https://' + req.get('host') + req.originalUrl,
-        nonce: isDevelopment ? null : nonce,
+        url: request.url,
+        fullUrl: 'https://' + request.get('host') + request.originalUrl,
+        nonce: isDevelopment ? null : response.locals.nonce,
     }
 
-    render(req, res, context)
+    render(request, response, context)
 })
 
-app.listen(frontendPort, (err) => {
-    if (err) {
-        throw err
+app.listen(frontendPort, (error) => {
+    if (error) {
+        throw error
     }
     console.log(`Running in ${process.env.NODE_ENV} mode`)
     console.log(`Listening on port ${frontendPort}`)

@@ -1,6 +1,5 @@
 # Todos
 
-- [ ] Generate a new nonce per request
 - [ ] Fix eslint
 - [ ] Convert project to 2 spaces
 - [ ] Check all todos
