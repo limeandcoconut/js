@@ -1,7 +1,7 @@
 # Todos
 
+- [ ] Generate a new nonce per request
 - [ ] Fix eslint
-- [ ] Investigate font preload style issue
 - [ ] Convert project to 2 spaces
 - [ ] Check all todos
 - [ ] Make sure path and fs aren't bundled into client

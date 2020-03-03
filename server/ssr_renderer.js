@@ -1,5 +1,5 @@
 const {createBundleRenderer} = require('vue-server-renderer')
-const compressStream = require('iltorb').compressStream
+const zlib = require('zlib')
 const accepts = require('accepts')
 
 const ssrRenderer = function(clientManifest, serverBundle, template) {
@@ -13,7 +13,7 @@ const ssrRenderer = function(clientManifest, serverBundle, template) {
     const render = (req, res, context) => {
         res.setHeader('Content-Type', 'text/html')
 
-        const stream = renderer.renderToStream(context)
+        let stream = renderer.renderToStream(context)
         stream.on('error', (err) => {
             if (err.code === 404) {
                 // Things failed. Recursively re-render 404.
@@ -31,10 +31,9 @@ const ssrRenderer = function(clientManifest, serverBundle, template) {
 
         if (accepts(req).encoding(['br'])) {
             res.setHeader('Content-Encoding', 'br')
-            stream.pipe(compressStream()).pipe(res)
-        } else {
-            stream.pipe(res)
+            stream = stream.pipe(zlib.createBrotliCompress())
         }
+        stream.pipe(res)
     }
 
     return render
