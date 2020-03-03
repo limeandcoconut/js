@@ -1,105 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{{meta.title}}</title>
-        {{{meta.description}}}
-        {{{meta.author}}}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{meta.title}}</title>
+    {{{meta.description}}}
+    {{{meta.author}}}
 
-        {{{meta.robots}}}
-        {{{meta.relCanonical}}}
+    {{{meta.robots}}}
+    {{{meta.relCanonical}}}
 
-        {{{meta.favicons.default}}}
+    {{{meta.favicons.default}}}
 
-        <meta property="og:title" content="{{meta.title}}" />
-        {{{meta.og.description}}}
-        {{{meta.og.image.src}}}
-        {{{meta.og.image.width}}}
-        {{{meta.og.image.height}}}
-        <meta property="og:url" content="{{ fullUrl }}" />
-        {{{meta.og.type}}}
+    <meta property="og:title" content="{{meta.title}}" />
+    {{{meta.og.description}}}
+    {{{meta.og.image.src}}}
+    {{{meta.og.image.width}}}
+    {{{meta.og.image.height}}}
+    <meta property="og:url" content="{{ fullUrl }}" />
+    {{{meta.og.type}}}
 
-        {{{meta.twitter.image.src}}}
-        {{{meta.twitter.image.alt}}}
-        {{{meta.twitter.card}}}
-        {{{meta.twitter.creator}}}
+    {{{meta.twitter.image.src}}}
+    {{{meta.twitter.image.alt}}}
+    {{{meta.twitter.card}}}
+    {{{meta.twitter.creator}}}
 
-        {{{meta.color}}}
-        {{{meta.ms.color}}}
-        {{{meta.favicons.ms}}}
+    {{{meta.color}}}
+    {{{meta.ms.color}}}
+    {{{meta.favicons.ms}}}
 
-        {{{meta.manifest}}}
-        {{{meta.favicons.x32}}}
-        {{{meta.favicons.x16}}}
-        {{{meta.favicons.apple}}}
-        {{{meta.favicons.safariMask}}}
+    {{{meta.manifest}}}
+    {{{meta.favicons.x32}}}
+    {{{meta.favicons.x16}}}
+    {{{meta.favicons.apple}}}
+    {{{meta.favicons.safariMask}}}
 
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-        <link rel="preload" href="https://fonts.gstatic.com/s/rubik/v7/iJWKBXyIfDnIV7nBrXyw023e.woff2" as="font" type="font/woff2" crossorigin />
-        <link rel="preload" href="https://fonts.gstatic.com/s/rubik/v7/iJWHBXyIfDnIV7Eyjmmd8WD07oB-.woff2" as="font" type="font/woff2" crossorigin />
-        <link rel="preload" href="https://fonts.gstatic.com/s/rubikmonoone/v6/UqyJK8kPP3hjw6ANTdfRk9YSN983TKUJcOj8.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/rubik/v7/iJWKBXyIfDnIV7nBrXyw023e.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="https://fonts.gstatic.com/s/rubik/v7/iJWHBXyIfDnIV7Eyjmmd8WD07oB-.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="https://fonts.gstatic.com/s/rubikmonoone/v6/UqyJK8kPP3hjw6ANTdfRk9YSN983TKUJcOj8.woff2" as="font" type="font/woff2" crossorigin />
 
-        {{{ renderStyles() }}}
+    {{{ renderStyles() }}}
 
-        <style id="preFontStyles" type="text/css">
-            .layout .column {
-                width: 100%;
-                align-content: center;
-                align-items: center;
-                justify-items: center;
-                justify-content: center;
-            }
-            .line:last-child {
-                display: block;
-                width: auto;
-            }
-            .link:last-child {
-                display: block;
-                width: auto;
-            }
-            .half + .half {
-                width: auto;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .title {
-                font-weight: bold;
-            }
-        </style>
+    <style id="preFontStyles" type="text/css">
+      .layout .column {
+        width: 100%;
+        align-content: center;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
+      }
+      .line:last-child {
+        display: block;
+        width: auto;
+      }
+      .link:last-child {
+        display: block;
+        width: auto;
+      }
+      .half + .half {
+        width: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .title {
+        font-weight: bold;
+      }
+    </style>
 
-    </head>
-    <body>
-        <!--vue-ssr-outlet-->
+  </head>
+  <body>
+    <!--vue-ssr-outlet-->
 
-        {{{ renderState() }}}
-        {{{ renderScripts() }}}
+    {{{ renderState() }}}
+    {{{ renderScripts() }}}
 
-        <script type="text/javascript">
-            // This allows the app to style itself differently before and after fonts load. 👌
+    <script type="text/javascript">
+      /* eslint-disable no-undef */
+      // This allows the app to style itself differently before and after fonts load. 👌
 
-            // TODO: Test that ESNext works here
-            const checkFonts = () => {
-                try {
-                    return document.fonts.check('1em Rubik')
-                } catch (error) {
-                    console.log('Browser does not support FontFaceSet.check(), falling back')
-                }
-            }
+      // TODO: Test that ESNext works here
+      const checkFonts = () => {
+        try {
+          return document.fonts.check('1em Rubik')
+        } catch (error) {
+          console.log('Browser does not support FontFaceSet.check(), falling back')
+        }
+      }
 
-            // If the fonts were loaded from cache don't render no-font styling
-            if (checkFonts()) {
-                preFontStyles.remove()
-            } else {
-                // fontTest and preFontStyles are divs with ids
-                const fontTestWidth = fontTest.clientWidth
-                // If the fonts aren't loaded from cache check manually then try again with the browser.
-                document.fonts.ready.then(() => {
-                    if ((fontTest.clientWidth !== fontTestWidth) || (checkFonts() !== false)) {
-                        preFontStyles.remove()
-                    }
-                })
-            }
-        </script>
-    </body>
+      // If the fonts were loaded from cache don't render no-font styling
+      if (checkFonts()) {
+        preFontStyles.remove()
+      } else {
+        // fontTest and preFontStyles are divs with ids
+        const fontTestWidth = fontTest.clientWidth
+        // If the fonts aren't loaded from cache check manually then try again with the browser.
+        document.fonts.ready.then(() => {
+          if ((fontTest.clientWidth !== fontTestWidth) || (checkFonts() !== false)) {
+            preFontStyles.remove()
+          }
+        })
+      }
+      /* eslint-enable no-undef */
+    </script>
+  </body>
 </html>

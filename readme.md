@@ -25,7 +25,7 @@ When you update the site to have more pages *UPDATE THE REL CANONICAL.*
 In components use relative urls for images.
 
 <!-- Replace with a blame link after this is pushed -->
-I [explicitly](/package.json) don't support IE. https://css-tricks.com/a-business-case-for-dropping-internet-explorer/
+I [explicitly](/package.json) don't support IE. [https://css-tricks.com/a-business-case-for-dropping-internet-explorer/](https://css-tricks.com/a-business-case-for-dropping-internet-explorer/)
 
 ### Fonts
 

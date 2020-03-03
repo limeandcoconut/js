@@ -11,23 +11,23 @@
 // .rubik(500)[];
 // Gives an element the font face rubik.
 .rubik(@weight: 400) {
-    // font-family: 'Courier New', sans-serif;
-    font-family: 'Rubik', 'Courier New', sans-serif;
-    font-weight: @weight;
+  // font-family: 'Courier New', sans-serif;
+  font-family: 'Rubik', 'Courier New', sans-serif;
+  font-weight: @weight;
 }
 
 .rmn(@weight: 400) {
-    // font-family: 'Courier New', sans-serif;
-    font-family: 'Rubik Mono One', 'Courier New', sans-serif;
-    font-weight: @weight;
+  // font-family: 'Courier New', sans-serif;
+  font-family: 'Rubik Mono One', 'Courier New', sans-serif;
+  font-weight: @weight;
 }
 
 .grid-breakpoints() {
-    @xs: 0;
-    @sm: 480px;
-    @md: 768px;
-    @lg: 1200px;
-    @xl: 2200px;
+  @xs: 0;
+  @sm: 480px;
+  @md: 768px;
+  @lg: 1200px;
+  @xl: 2200px;
 };
 
 @diff: .grid-breakpoints[@xl] - .grid-breakpoints[@sm];
@@ -39,70 +39,70 @@
 // @baseline: 6px;
 @baseline: @b;
 .basis(@scalar) {
-    // @return: calc(@baseline * @scalar);
-    // WARNING: Always update the @baseline/@b variables and .basis() in conjunction.
-    @return: calc( (((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]) * @scalar)
+  // @return: calc(@baseline * @scalar);
+  // WARNING: Always update the @baseline/@b variables and .basis() in conjunction.
+  @return: calc( (((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @base-diff + .px(@min-base)[]) * @scalar)
 }
 
 @spacing: {
-    no:      0;
-    xxs:     1 * @baseline;
-    xs:      2 * @baseline;
-    sm:      3 * @baseline;
-    md:      4 * @baseline;
-    lg:      5 * @baseline;
-    xl:      7 * @baseline;
-    xxl:     10 * @baseline;
-    xxxl:    11 * @baseline;
+  no:    0;
+  xxs:   1 * @baseline;
+  xs:    2 * @baseline;
+  sm:    3 * @baseline;
+  md:    4 * @baseline;
+  lg:    5 * @baseline;
+  xl:    7 * @baseline;
+  xxl:   10 * @baseline;
+  xxxl:  11 * @baseline;
 };
 
 // height: calc(@dashboard-height ~"-" (@i * (@dashlet-header-height + @dashboard-margin + @dashlet-border)));
 // which will result in e.g. height: calc(90.5% - 36px);
 
 .min-font-sizes() {
-    @card:            6;
-    @cardTitle:       12;
-    @cardSubtitle:    8;
-    @xs:              10;
-    @sm:              12.5;
-    @md:              15;
-    @venti:           22.5;
-    @tetra:           36;
-    // @giga:            52.5;
-    @giga:            60;
+  @card:      6;
+  @cardTitle:     12;
+  @cardSubtitle:  8;
+  @xs:        10;
+  @sm:        12.5;
+  @md:        15;
+  @venti:       22.5;
+  @tetra:       36;
+  // @giga:      52.5;
+  @giga:      60;
 };
 
 .max-font-sizes() {
-    @card:            30;
-    @cardTitle:       60;
-    @cardSubtitle:    40;
-    @xs:              20;
-    @sm:              25;
-    @md:              30;
-    @venti:           45;
-    @tetra:           72;
-    @giga:           108;
+  @card:      30;
+  @cardTitle:     60;
+  @cardSubtitle:  40;
+  @xs:        20;
+  @sm:        25;
+  @md:        30;
+  @venti:       45;
+  @tetra:       72;
+  @giga:       108;
 };
 
 .overlay(@color: @redline) {
-    &::before {
-        content: ' ';
-        display: block;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0px;
-        bottom: 0;
-        left: 0;
-        right: 0;
+  &::before {
+    content: ' ';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
-        background: repeating-linear-gradient(transparent, transparent calc(@baseline - 1px), @color calc(@baseline - 1px), @color @baseline);
-        z-index: 1000;
-        pointer-events: none;
-        // font-size: .basis(5)[];
-        // font-size: @baseline;
-        // padding-top: @padding;
-    }
+    background: repeating-linear-gradient(transparent, transparent calc(@baseline - 1px), @color calc(@baseline - 1px), @color @baseline);
+    z-index: 1000;
+    pointer-events: none;
+    // font-size: .basis(5)[];
+    // font-size: @baseline;
+    // padding-top: @padding;
+  }
 }
 
 
@@ -111,7 +111,7 @@
 // height: .height(md)[];
 // This is here to ensure that you are sticking to your normalization.
 .height(@multiple) {
-    @return: @baseline * @multiple;
+  @return: @baseline * @multiple;
 }
 
 // px
@@ -119,7 +119,7 @@
 // font-size: .px(@min-fz)[];
 // Converts the given scalar to px.
 .px(@scalar) {
-    @return: @scalar * 1px;
+  @return: @scalar * 1px;
 }
 
 // p
@@ -127,40 +127,40 @@
 // font-size: .p(@min-width)[];
 // Converts the given scalar to percent.
 .p(@scalar) {
-    @return: @scalar * 1%;
+  @return: @scalar * 1%;
 }
 
 // above
 // Standard usage:
 //.above(560px; {
-//    background: red;
+//  background: red;
 // });
 // OR:
 // .above(md, {
-//    background: red;
+//  background: red;
 // });
 .above(@width; @rules) when not (isnumber(@width)) {
-    @media screen and (min-width: .grid-breakpoints[@@width]) {
-        @rules();
-    }
+  @media screen and (min-width: .grid-breakpoints[@@width]) {
+    @rules();
+  }
 }
 
 .above(@width; @rules) when (isnumber(@width)) {
-    @media screen and (min-width: @width) {
-        @rules();
-    }
+  @media screen and (min-width: @width) {
+    @rules();
+  }
 }
 
 .below(@width; @rules) when not (isnumber(@width)) {
-    @media screen and (max-width: .grid-breakpoints[@@width] - 1px) {
-        @rules();
-    }
+  @media screen and (max-width: .grid-breakpoints[@@width] - 1px) {
+    @rules();
+  }
 }
 
 .below(@width; @rules) when (isnumber(@width)) {
-    @media screen and (max-width: @width) {
-        @rules();
-    }
+  @media screen and (max-width: @width) {
+    @rules();
+  }
 }
 
 // aria :focus-visible
@@ -169,14 +169,14 @@
 // Use this to visually hide something that you want to be visible to screen readers.
 // Cafrefully consider if thats something you want to do.
 .aria-visible() {
-    clip-path: inset(100%);
-    clip: rect(1px 1px 1px 1px); /* IE 6/7 */
-    clip: rect(1px, 1px, 1px, 1px);
-    height: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap; /* added line */
-    width: 1px;
+  clip-path: inset(100%);
+  clip: rect(1px 1px 1px 1px); /* IE 6/7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; /* added line */
+  width: 1px;
 }
 
 // fz (font-size)
@@ -185,21 +185,21 @@
 // Outputs styles which will gracefully scale between the minimum font-size at the minimum screen size and the maximum
 // font-size at the maximum screen size. Outside screen size limits will default to the appropriate font-size extreme.
 .fz(@key) {
-    @min-fz: .min-font-sizes[@@key];
-    @max-fz: .max-font-sizes[@@key];
+  @min-fz: .min-font-sizes[@@key];
+  @max-fz: .max-font-sizes[@@key];
 
-    font-size: .px(@min-fz)[];
+  font-size: .px(@min-fz)[];
 
-    .above(sm; {
-        @diff: .grid-breakpoints[@xl] - .grid-breakpoints[@sm];
-        @font-diff: @max-fz - @min-fz;
-        // @font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
-        font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
-    });
+  .above(sm; {
+    @diff: .grid-breakpoints[@xl] - .grid-breakpoints[@sm];
+    @font-diff: @max-fz - @min-fz;
+    // @font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+    font-size: calc( ((100vw - .grid-breakpoints[@sm]) / unit(@diff)) * @font-diff + .px(@min-fz)[]);
+  });
 
-    .above(xl; {
-        font-size: .px(@max-fz)[];
-    });
+  .above(xl; {
+    font-size: .px(@max-fz)[];
+  });
 }
 
 // Responsive ratio
@@ -207,19 +207,19 @@
 // @include ratio(16; 9);
 // @include ratio(16; 9; true);
 .ratio(@x; @y; @pseudo: false) when (@pseudo = true) {
-    @padding: unit((@y / @x) * 100, %);
-    &::before {
-        content: ' ';
-        display: block;
-        position: relative;
-        width: 100%;
-        padding-top: @padding;
-    }
+  @padding: unit((@y / @x) * 100, %);
+  &::before {
+    content: ' ';
+    display: block;
+    position: relative;
+    width: 100%;
+    padding-top: @padding;
+  }
 }
 
 .ratio(@x; @y; @pseudo: false) when not (@pseudo = true) {
-    @padding: unit((@y / @x) * 100, %);
-    padding-top: @padding;
+  @padding: unit((@y / @x) * 100, %);
+  padding-top: @padding;
 }
 
 @base-font-size: 	12px;

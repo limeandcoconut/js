@@ -1,5 +1,5 @@
 module.exports = {
-  apps : [{
+  apps: [{
     name: 'js',
     script: 'server/serve.js',
 
@@ -7,9 +7,9 @@ module.exports = {
     instances: 1,
     autorestart: true,
     watch: false,
-    max_memory_restart: '500M',
+    max_memory_restart: '500M', // eslint-disable-line camelcase
     env: {
       NODE_ENV: 'production',
     },
   }],
-};
+}

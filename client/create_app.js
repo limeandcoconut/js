@@ -9,18 +9,18 @@ import siteMeta from '../config/meta.config.js'
 Vue.mixin(meta(siteMeta))
 
 export default () => {
-    const store = createStore()
-    const router = createRouter()
+  const store = createStore()
+  const router = createRouter()
 
-    const app = new Vue({
-        router,
-        store,
-        ...App,
-    })
+  const app = new Vue({
+    router,
+    store,
+    ...App,
+  })
 
-    return {
-        app,
-        router,
-        store,
-    }
+  return {
+    app,
+    router,
+    store,
+  }
 }

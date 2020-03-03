@@ -13,83 +13,82 @@ const Visualizer = require('webpack-visualizer-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 
 let config = {
-    mode: isProduction ? 'production' : 'development',
-    output: {
-        path: path.resolve(__dirname, '../', 'dist'),
-        publicPath: '/dist/',
-        filename: '[name]-bundle.js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                use: ['babel-loader'],
-                exclude: /node_modules/,
+  mode: isProduction ? 'production' : 'development',
+  output: {
+    path: path.resolve(__dirname, '../', 'dist'),
+    publicPath: '/dist/',
+    filename: '[name]-bundle.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['babel-loader'],
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader',
+      },
+      {
+        test: /\.less$/,
+        use: [
+          // This would add css extraction for prod but nix inlining the first chunk.
+          // isProduction ?
+          // {
+          //     loader: ExtractCssChunks.loader,
+          //     options: {
+          //         hmr: true,
+          //     },
+          // }
+          // : 'vue-style-loader',
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: !isProduction,
             },
-            {
-                test: /\.vue$/,
-                use: 'vue-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('autoprefixer')],
             },
-            {
-                test: /\.less$/,
-                use: [
-                    // This would add css extraction for prod but nix inlining the first chunk.
-                    // isProduction ?
-                    // {
-                    //     loader: ExtractCssChunks.loader,
-                    //     options: {
-                    //         hmr: true,
-                    //     },
-                    // }
-                    // : 'vue-style-loader',
-                    'vue-style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            // TODO: Does this still minimize?
-                            sourceMap: !isProduction,
-                        },
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [require('autoprefixer')],
-                        },
-                    },
-                    'less-loader',
-                ],
-            },
+          },
+          'less-loader',
         ],
-    },
-    plugins: [
-        new CaseSensitivePathsPlugin(),
-        new VueLoaderPlugin(),
-        new HTMLPlugin({
-            template: 'client/index.template.html',
-            // Inject false turns off automatic injection of Css and JS
-            inject: false,
-        }),
-        // Also required for prod css extraction
-        // new ExtractCssChunks({
-        //     filename: `[name]${isProduction ? '.[contenthash]' : ''}.css`,
-        //     chunkFilename: `[id]${isProduction ? '.[contenthash]' : ''}.css`,
-        // }),
-        // Adds some highlighting as sugar
-        // TODO: On trial
-        new FriendlyErrorsWebpackPlugin(),
+      },
     ],
-    optimization: {},
+  },
+  plugins: [
+    new CaseSensitivePathsPlugin(),
+    new VueLoaderPlugin(),
+    new HTMLPlugin({
+      template: 'client/index.template.html',
+      // Inject false turns off automatic injection of Css and JS
+      inject: false,
+    }),
+    // Also required for prod css extraction
+    // new ExtractCssChunks({
+    //     filename: `[name]${isProduction ? '.[contenthash]' : ''}.css`,
+    //     chunkFilename: `[id]${isProduction ? '.[contenthash]' : ''}.css`,
+    // }),
+    // Adds some highlighting as sugar
+    // TODO: On trial
+    new FriendlyErrorsWebpackPlugin(),
+  ],
+  optimization: {},
 }
 
 if (isProduction) {
-    config.plugins.push(
-        new Visualizer({filename: '../stats.html'}),
-        new MinifyPlugin(),
-    )
+  config.plugins.push(
+    new Visualizer({filename: '../stats.html'}),
+    new MinifyPlugin(),
+  )
 } else {
-    config.devtool = 'cheap-module-eval-source-map'
-    // config.devtool = 'cheap-eval-source-map'
-    // config.devtool = 'eval'
+  config.devtool = 'cheap-module-eval-source-map'
+  // config.devtool = 'cheap-eval-source-map'
+  // config.devtool = 'eval'
 }
 
 module.exports = config

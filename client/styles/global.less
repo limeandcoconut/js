@@ -3,12 +3,12 @@
 @import './fonts.less';
 
 // .clearfix:after {
-//     visibility: hidden;
-//     display: block;
-//     font-size: 0;
-//     content: " ";
-//     clear: both;
-//     height: 0;
+//   visibility: hidden;
+//   display: block;
+//   font-size: 0;
+//   content: " ";
+//   clear: both;
+//   height: 0;
 // }
 
 // .clearfix { display: inline-block; }
@@ -18,42 +18,42 @@
 // /* close commented backslash hack */
 
 * {
-    -webkit-font-smoothing: antialiased;
-    -webkit-box-sizing: border-box;
-    -khtml-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-    line-height: 1em;
-    font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+  -webkit-box-sizing: border-box;
+  -khtml-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1em;
+  font-size: 12px;
 }
 
 html, body {
-    height: 100%;
-    font-family: arial;
-    font-display: swap;
-    .rubik();
+  height: 100%;
+  font-family: arial;
+  font-display: swap;
+  .rubik();
 }
 
 button {
-    border: none;
-    appearance: none;
-    outline: none;
-    .rubik();
+  border: none;
+  appearance: none;
+  outline: none;
+  .rubik();
 }
 
 .link {
-    color: black;
+  color: black;
+
+  &:hover {
+    color: @red;
+  }
+
+  &:visited {
+    color: @dimred;
 
     &:hover {
-        color: @red;
+      color: @red;
     }
-
-    &:visited {
-        color: @dimred;
-
-        &:hover {
-            color: @red;
-        }
-    }
+  }
 }
