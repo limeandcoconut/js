@@ -12,7 +12,7 @@ const Visualizer = require('webpack-visualizer-plugin')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
-let config = {
+const config = {
   mode: isProduction ? 'production' : 'development',
   output: {
     path: path.resolve(__dirname, '../', 'dist'),
@@ -73,8 +73,6 @@ let config = {
     //     filename: `[name]${isProduction ? '.[contenthash]' : ''}.css`,
     //     chunkFilename: `[id]${isProduction ? '.[contenthash]' : ''}.css`,
     // }),
-    // Adds some highlighting as sugar
-    // TODO: On trial
     new FriendlyErrorsWebpackPlugin(),
   ],
   optimization: {},
@@ -87,6 +85,7 @@ if (isProduction) {
   )
 } else {
   config.devtool = 'cheap-module-eval-source-map'
+  // config.devtool = 'source-map'
   // config.devtool = 'cheap-eval-source-map'
   // config.devtool = 'eval'
 }

@@ -18,6 +18,8 @@ const {productionHost} = require('../config/config.js')
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+const Visualizer = require('webpack-visualizer-plugin')
+
 const config = {
   ...base,
 
@@ -42,7 +44,22 @@ const config = {
       title: 'Webpack Client Build',
       suppressSuccess: true,
     }),
+    new Visualizer(),
   ],
+  stats: {
+    cached: false,
+    cachedAssets: false,
+    chunks: false,
+    chunkModules: false,
+    colors: true,
+    hash: false,
+    modules: false,
+    reasons: false,
+    timings: true,
+    version: false,
+    warnings: true,
+    children: true,
+  },
 }
 
 if (isProduction) {

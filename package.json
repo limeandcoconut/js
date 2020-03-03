@@ -9,7 +9,6 @@
     "pack:prod": "run-p pack:client:prod pack:server:prod",
     "pack:client:prod": "NODE_ENV=production webpack --config config/webpack.client.config.js --progress --hide-modules",
     "pack:server:prod": "NODE_ENV=production webpack --config config/webpack.server.config.js --progress --hide-modules",
-    "pack:stats": "NODE_ENV=production webpack --config config/webpack.client.config.js --hide-modules --json > dist/bundle-stats.json",
     "clean": "rm dist/*"
   },
   "keywords": [],

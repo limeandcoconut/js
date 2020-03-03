@@ -43,6 +43,11 @@ const config = Object.assign({}, base, {
     //     maxChunks: 1,
     // }),
   ],
+  stats: {
+    colors: true,
+    warnings: true,
+    children: true,
+  },
 })
 
 module.exports = config

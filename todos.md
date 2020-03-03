@@ -1,6 +1,6 @@
 # Todos
+- [ ] Switch to new service worker plugin https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#generatesw_plugin
 - [ ] Check all todos
-- [ ] Make sure path and fs aren't bundled into client
 - [ ] Badges
 - [ ] License check plugin like on https://github.com/Urthen/case-sensitive-paths-webpack-plugin
 - [ ] https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0
