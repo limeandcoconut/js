@@ -1,3 +1,9 @@
+'use strict'
+
 module.exports = {
-    extends: 'brian',
+    extends: 'eslint-config-limeandcoconut',
+    plugins: [
+    ],
+    rules: {
+    },
 }
