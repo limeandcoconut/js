@@ -46,16 +46,14 @@ let config = {
                     {
                         loader: 'css-loader',
                         options: {
-                            minimize: isProduction,
+                            // TODO: Does this still minimize?
                             sourceMap: !isProduction,
                         },
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: () => [require('autoprefixer')({
-                                browsers: ['> 1%', 'last 2 versions'],
-                            })],
+                            plugins: [require('autoprefixer')],
                         },
                     },
                     'less-loader',
