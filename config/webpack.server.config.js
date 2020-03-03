@@ -10,7 +10,7 @@ const config = Object.assign({}, base, {
   // compiling Vue components.
   target: 'node',
   // Point entry to your app's server entry file
-  entry: './client/entry_server.js',
+  entry: './client/entry-server.js',
   // This tells the server bundle to use Node-style exports
   output: Object.assign({}, base.output, {
     libraryTarget: 'commonjs2',

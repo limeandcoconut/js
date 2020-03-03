@@ -1,5 +1,4 @@
 # Todos
-- [ ] Convert project to 2 spaces
 - [ ] Check all todos
 - [ ] Make sure path and fs aren't bundled into client
 - [ ] Badges

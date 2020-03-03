@@ -22,7 +22,7 @@ const config = {
   ...base,
 
   entry: {
-    app: './client/entry_client.js',
+    app: './client/entry-client.js',
   },
   plugins: [
     ...(base.plugins || []),

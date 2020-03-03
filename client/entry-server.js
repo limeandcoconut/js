@@ -1,4 +1,4 @@
-import createApp from './create_app.js'
+import createApp from './create-app.js'
 
 export default (context) => {
   const {app, router, store} = createApp()

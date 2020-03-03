@@ -123,14 +123,14 @@ if (isDevelopment) {
   render = (request, response) => response.send('Compiling, reload in a moment.')
   // Add hot middleware and create a new render function each time both client and server have finished packing.
   require('./hmr.js')(app, (serverBundle, clientManifest, template) => {
-    render = require('./ssr_renderer.js')(clientManifest, serverBundle, template)
+    render = require('./ssr-renderer.js')(clientManifest, serverBundle, template)
   })
   // If in production, load the client and server files to be served.
 } else {
   const template = fs.readFileSync(path.resolve('./dist/index.html'), 'utf8')
   const serverBundle = JSON.parse(fs.readFileSync('./dist/vue-ssr-server-bundle.json', 'utf8'))
   const clientManifest = JSON.parse(fs.readFileSync('./dist/vue-ssr-client-manifest.json', 'utf8'))
-  render = require('./ssr_renderer.js')(clientManifest, serverBundle, template)
+  render = require('./ssr-renderer.js')(clientManifest, serverBundle, template)
 }
 
 app.get('*', (request, response) => {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
-import createApp from './create_app.js'
+import createApp from './create-app.js'
 import {gaDevId as gaDevelopmentId, gaProductionId} from '../config/config.js'
 
 const {app, store, router} = createApp()
