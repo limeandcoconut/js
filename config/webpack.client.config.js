@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const {GenerateSW} = require('workbox-webpack-plugin')
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 const CopyPlugin = require('copy-webpack-plugin')
@@ -85,16 +85,16 @@ if (isProduction) {
       compressionOptions: {level: 11},
     }),
     // It'd be best to read options for this and cater to specific project needs
-    // https://www.npmjs.com/package/sw-precache-webpack-plugin
-    new SWPrecacheWebpackPlugin({
+    // https://developers.google.com/web/tools/workbox/guides/generate-service-worker/webpack
+    // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.GenerateSW#GenerateSW
+    new GenerateSW({
       // This will interpret a leading slash as root
-      filename: path.join('proxy_to_site_root', '/service-worker.js'),
-      // staticFileGlobs: ['dist/**/*.{js,html,css}'],
-      // minify: true,
-      // stripPrefix: 'dist/',
+      swDest: path.join('proxy_to_site_root', '/service-worker.js'),
+      // If false a separate runtime will be generated and needs to be served in parallel
+      inlineWorkboxRuntime: true,
       runtimeCaching: [{
-        urlPattern: '/*',
-        handler: 'networkFirst',
+        urlPattern: /.*/,
+        handler: 'NetworkFirst',
         // Options:
         // cacheFirst
         // fastest
@@ -102,15 +102,15 @@ if (isProduction) {
         // cacheOnly
         // Why u no slowest?
       }],
-      staticFileGlobs: [
-        'dist/**.css',
-        'dist/img/**.*',
-        'dist/**.js',
+      include: [
+        /dist\/.*\.css/,
+        /dist\/img\/.*/,
+        /dist\/.*\.js/,
         // TODO: cache fonts?
       ],
       // Don't allow the service worker to try to cache google analytics or your tracking will stop working
       // Disable any other scripts you don't want cached here as well
-      staticFileGlobsIgnorePatterns: [/google-analytics.com/],
+      exclude: [/google-analytics.com/],
     }),
     // These paths are joined here so that
     // path, paths, and subsequently fs are not included on client where this is use
