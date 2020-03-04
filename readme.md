@@ -36,7 +36,6 @@ Getting local copies of Google Fonts
 https://google-webfonts-helper.herokuapp.com
 
 ### Todos
-- [ ] Client and server SSR manifests shouldn't be put into dist. They shouldn't be publicly accessible.
 - [ ] Add blog
 - [ ] Add miami theme
 

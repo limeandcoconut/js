@@ -53,13 +53,13 @@ if (isDevelopment) {
         ...contentSelf,
         ...contentAnalytics,
         (request, response) => `'nonce-${response.locals.nonce}'`,
-        '\'sha256-oGjqhxjK6CjWr4F7Ij8Z5vkDO4vAK+Zz6sK3MlcUuJg=\'',
+        '\'sha256-aqUHABLCeyqxUUMbTH5BBX/kb68k0Pjj6fW+0IPYYuM=\'',
       ],
       styleSrc: [...contentSelf, '\'unsafe-inline\''],
       fontSrc: [...contentSelf, ...contentFonts],
       imgSrc: [...contentSelf, ...contentAnalytics],
       prefetchSrc: [...contentSelf, ...contentFonts],
-      connectSrc: [...contentSelf, ...contentAnalytics],
+      connectSrc: [...contentSelf, ...contentAnalytics, ...contentFonts],
       // TODO: Add a report URI if you like
       // reportUri
     },
