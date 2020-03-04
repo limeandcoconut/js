@@ -40,7 +40,6 @@ https://google-webfonts-helper.herokuapp.com
 - [ ] Add miami theme
 
 ### Maybe Todos
-- [ ] Update to new rubik, remove woff
 - [ ] Add WebpackDevServerUtils.choosePort to projects
 - [ ] Add <base>
 
