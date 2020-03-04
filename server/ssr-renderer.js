@@ -23,8 +23,8 @@ const ssrRenderer = function(clientManifest, serverBundle, template) {
           fullUrl: 'https://' + request.headers.host + request.url,
         })
       } else {
-        // TODO: Shouldn't this be a 500?
         console.error(error)
+        res.statusCode = 500
         res.send('Unknown error rendering content')
       }
     })
