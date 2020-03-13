@@ -91,17 +91,10 @@ if (isDevelopment) {
 
 // Serve any static files in public
 // Could also replace with nginx if there's a need
+// Currentluy fonts are the only thing not otherwise accessible
 app.use('/', expressStaticGzip(path.resolve(__dirname, '../', 'public'), {
   enableBrotli: true,
-  indexFromEmptyFile: false,
-  serveStatic: {
-    setHeaders(response, path) {
-      // For best results manifest.json must be served with application/manifest+json
-      if (/\/public\/manifest\.json\W?/.test(path)) {
-        response.set('Content-Type', 'application/manifest+json; charset=UTF-8')
-      }
-    },
-  },
+  index: false,
   orderPreference: ['br'],
 }))
 
@@ -110,6 +103,14 @@ app.use('/dist/', expressStaticGzip(path.resolve(__dirname, '../', 'dist'), {
   enableBrotli: true,
   index: false,
   orderPreference: ['br'],
+  serveStatic: {
+    setHeaders(response, path) {
+      // For best results manifest.json must be served with application/manifest+json
+      if (/\/dist\/manifest\.json\W?/.test(path)) {
+        response.set('Content-Type', 'application/manifest+json; charset=UTF-8')
+      }
+    },
+  },
 }))
 
 let render
