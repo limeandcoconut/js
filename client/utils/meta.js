@@ -1,5 +1,4 @@
 const tags = {
-  name: content => `<meta name="description" content="${content}" />`,
   title: content => content,
   author: content => `<meta name="author" content="${content}" />`,
   description: content => `<meta name="description" content="${content}" />`,
