@@ -15,9 +15,8 @@ For local testing of Http2 there is an included docker compose file and and HAPr
 For deployment, using HAProxy via the included config is also reccomended.  
 
 ## Things to edit for your own project
-Customize config/config.js  
-Customize public/manifest.json  
-Add icons  
+Customize config/config.js   
+Add icons and fonts 
 Author, colors, twitter names in config/meta.config.js
 
 ## Notes
