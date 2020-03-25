@@ -1,0 +1,80 @@
+# Global configurations
+global
+    log 127.0.0.1 local0
+    log 127.0.0.1 local1 notice
+    tune.ssl.default-dh-param 2048 # required parameter for SSL bumping
+
+# Default settings
+defaults
+    log     global
+    mode    http # tcp can be used if you don't want to do SSL bumping
+    option  httplog # tcplog can be used if you don't want to do SSL bumping
+    option  dontlognull
+    timeout connect  5000
+    timeout client  10000
+    timeout server  10000
+
+frontend https
+    bind *:80
+    # You can use either a single folder or multiple crt definitions in this line (crt test.pem crt test2.pem)
+    bind *:443 ssl crt /etc/ssl/ alpn h2,http/1.1
+
+    # Access Control Lists
+    # acl <aclname> <criterion> [flags] [operator] [<value>] ...
+    # hdr(host) -i matches the host header case insensitive
+
+    # Domain acls
+    acl js-tech hdr(host) -i jacobsmith.tech 
+    acl sundry hdr(host) -i sundry.jacobsmith.tech 
+    acl recat hdr(host) -i recat.jacobsmith.tech 
+    # Send /static traffic to nginx
+    acl static path_beg -i /static 
+    # Send /meta traffic to nginx
+    acl meta path_beg -i /meta
+    # Send requests for these files specifically to nginx
+    acl serve-root path_beg -i /robots.txt /sitemap.xml /browserconfig.xml /favicon.ico /service-worker.js
+
+    # Request Rewrites
+    # These happen nomatter where they are placed in this block but the order of them matters!
+    # This will match any request for things from static/served_from_root and rewrite it to a dir that, hopefully 🤨, doesn't exist
+    reqrep ^([^\ :]*)\ \/static/served_from_root(\/.*)     \1\ /static/intentionally_rewritten_this_should_404_via_nginx\2 if recat
+    # This'll match those any request listed in the reve-root acl and and rewrite it to be served properly
+    reqrep ^([^\ :]*)\ (\/[\w\.\/]+(?:[^\w\/].*)?)    \1\ /static/served_from_root\2 if serve-root recat
+
+    # If the redirect is before a reqrep it'll warn on start
+    # This is because reqreps will pe executed even if it redirects
+    redirect scheme https code 301 if !{ ssl_fc }
+    option forwardfor
+
+    # Send main site traffic along
+    use_backend backend-js if js-tech
+
+    # Send sundry traffic along
+    use_backend backend-sundry if sundry 
+
+    # Send static traffic to nginx
+    use_backend backend-recat-static if recat static || meta || serve-root
+
+    # Send standard trafic to the node server
+    use_backend backend-recat if recat
+
+backend backend-recat
+    option forwardfor
+    # server host.docker.internal host.docker.internal:8500 check # Mac
+    server localhost localhost:8500 check # Linux
+
+backend backend-recat-static
+    option forwardfor
+    # server host.docker.internal host.docker.internal:8502 check # Mac
+    server localhost localhost:8502 check # Linux
+
+backend backend-js 
+    option forwardfor
+    # server host.docker.internal host.docker.internal:3005 check # Mac
+    server localhost localhost:3005 check # Linux
+
+backend backend-sundry
+    option forwardfor
+    # server host.docker.internal host.docker.internal:3005 check # Mac
+    server localhost localhost:3010 check # Linux
+

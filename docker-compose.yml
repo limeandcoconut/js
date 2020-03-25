@@ -9,5 +9,6 @@ services:
       - 443:443
       - 80:80
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./config/:/usr/local/etc/haproxy/
       - ./certs:/etc/ssl/
+      - ./stats:/var/lib/haproxy/stats
