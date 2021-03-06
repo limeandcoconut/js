@@ -10,30 +10,30 @@ const ssrRenderer = function(clientManifest, serverBundle, template) {
     runInNewContext: false,
   })
 
-  const render = (request, res, context) => {
-    res.setHeader('Content-Type', 'text/html')
+  const render = (request, response, context) => {
+    response.setHeader('Content-Type', 'text/html')
 
     let stream = renderer.renderToStream(context)
     stream.on('error', (error) => {
       if (error.code === 404) {
         // Things failed. Recursively re-render 404.
-        res.statusCode = 404
-        render(request, res, {
+        response.statusCode = 404
+        render(request, response, {
           url: '/404',
           fullUrl: 'https://' + request.headers.host + request.url,
         })
       } else {
         console.error(error)
-        res.statusCode = 500
-        res.send('Unknown error rendering content')
+        response.statusCode = 500
+        response.send('Unknown error rendering content')
       }
     })
 
     if (accepts(request).encoding(['br'])) {
-      res.setHeader('Content-Encoding', 'br')
+      response.setHeader('Content-Encoding', 'br')
       stream = stream.pipe(zlib.createBrotliCompress())
     }
-    stream.pipe(res)
+    stream.pipe(response)
   }
 
   return render

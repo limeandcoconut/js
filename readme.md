@@ -42,6 +42,12 @@ Getting local copies of Google Fonts
 https://google-webfonts-helper.herokuapp.com
 
 ## Todos
+- [ ] Convert to VueMeta
+- [ ] Update from mechabus, grid, plinth
+- [ ] Update deps
+- [ ] Fix styles
+- [ ] Update eslint config
+- [ ] Add space to config - around imports before parens
 - [ ] Add blog
 - [ ] Add miami theme
 
