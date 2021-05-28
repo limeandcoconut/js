@@ -42,6 +42,7 @@ Getting local copies of Google Fonts
 https://google-webfonts-helper.herokuapp.com
 
 ## Todos
+- [ ] Use jsfuck for email addres to prevent scraping and 4 lols
 - [ ] Convert to VueMeta
 - [ ] Update from mechabus, grid, plinth
 - [ ] Update deps
